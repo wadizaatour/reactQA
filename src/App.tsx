@@ -17,6 +17,7 @@ function App() {
     text: string;
     answer: string;
   };
+
   const dispatch = useDispatch();
   const questionInput = useSelector((state: RootState) => state.input.value);
   const [questionList, setQuestionList] = useState<Question[]>(() => {
@@ -33,6 +34,7 @@ function App() {
       setQuestionList(JSON.parse(storedQuestionList));
     }
   }, []);
+
   const handleQuestionChange = (question: string) => {
     setQuestion(question);
   };
@@ -82,12 +84,14 @@ function App() {
       }
     });
   };
+
   const handleDeleteAllQuestions = () => {
     dispatch(deleteQuestionList());
     localStorage.setItem("questions", JSON.stringify([]));
     setQuestionList([]);
     setExpandedQuestions([]);
   };
+
   return (
     <>
       <h1>The awesome Q/A tool</h1>
