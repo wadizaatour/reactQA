@@ -1,32 +1,32 @@
-import Button from "./components/button/button"
-import Input from "./components/input/input"
-import './App.css'
-import { setValue } from './redux/inputSlice';
-import { addQuestion, removeQuestion } from './redux/questionsSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './redux/store';
+import Button from "./components/button/button";
+import Input from "./components/input/input";
+import "./App.css";
+import { setValue } from "./redux/inputSlice";
+import { addQuestion, removeQuestion } from "./redux/questionsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./redux/store";
 import { useState } from "react";
 function App() {
-
   const dispatch = useDispatch();
   const questionInput = useSelector((state: RootState) => state.input.value);
   const questions = useSelector((state: RootState) => state.questions.list);
-  const [newQuestion, setQuestion] = useState('');
+  const [newQuestion, setQuestion] = useState("");
   const handleQuestionChange = (newValue: string) => {
     setQuestion(newValue);
   };
   // State for creating a new answer
-  const [newAnswer, setAnswer] = useState('');
+  const [newAnswer, setAnswer] = useState("");
   const handleAnswerChange = (newValue: string) => {
     setAnswer(newValue);
   };
   const handleAddQuestion = () => {
-    const trimmedValue = typeof questionInput === 'string' ? questionInput.trim() : questionInput; //Clearing white space from string
-    if (trimmedValue !== '') {
+    const trimmedValue =
+      typeof questionInput === "string" ? questionInput.trim() : questionInput; //Clearing white space from string
+    if (trimmedValue !== "") {
       dispatch(addQuestion(trimmedValue));
-      dispatch(setValue(''));
-      setQuestion('');
-      setAnswer('');
+      dispatch(setValue(""));
+      setQuestion("");
+      setAnswer("");
     }
   };
   const handleRemoveQuestionAndAnswer = (questionId: string) => {
@@ -42,15 +42,25 @@ function App() {
           {questions.map((question) => (
             <li key={question.id}>
               {question.text}
-              <button onClick={() => handleRemoveQuestionAndAnswer(question.id)}>
+              <button
+                onClick={() => handleRemoveQuestionAndAnswer(question.id)}
+              >
                 Remove
               </button>
             </li>
           ))}
         </ul>
       </div>
-      <Button children="Sort questions" color="blue" onClick={() => console.log('clicked')} />
-      <Button children="Removed questions" color="red" onClick={() => console.log('clicked')} />
+      <Button
+        children="Sort questions"
+        color="blue"
+        onClick={() => console.log("clicked")}
+      />
+      <Button
+        children="Removed questions"
+        color="red"
+        onClick={() => console.log("clicked")}
+      />
       <h2> Create a new question</h2>
       <Input
         type="text"
@@ -68,10 +78,13 @@ function App() {
         onChange={handleAnswerChange}
         disabled={false}
       ></Input>
-      <Button children="Create question" color="green" onClick={handleAddQuestion} />
-
+      <Button
+        children="Create question"
+        color="green"
+        onClick={handleAddQuestion}
+      />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
