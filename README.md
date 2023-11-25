@@ -11,8 +11,7 @@
   - [Adding Questions](#adding-questions)
   - [Viewing Questions](#viewing-questions)
 - [Redux Toolkit](#redux-toolkit)
-- [Contributing](#contributing)
-- [License](#license)
+ 
 
 ## Introduction
 
