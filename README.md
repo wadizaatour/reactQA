@@ -16,12 +16,15 @@
 
 ## Introduction
 
-Welcome to the Studocu React App! This application allows users to add questions through a form input and view them in a list. It utilizes React for the user interface and Redux Toolkit for state management.
+Welcome to the reactQA! This application allows users to add questions through a form input and view them in a list. It utilizes React for the user interface and Redux Toolkit for state management.
 
 ## Features
 
 - Add questions using a form input.
 - Display a list of added questions.
+- Delete all questions or separately
+- Tooltip
+  
 
 ## Getting Started
 
