@@ -2,7 +2,11 @@ import Button from "./components/button/button";
 import Input from "./components/input/input";
 import "./App.css";
 import { setValue } from "./redux/inputSlice";
-import { addQuestion, removeQuestion } from "./redux/questionsSlice";
+import {
+  addQuestion,
+  deleteQuestion,
+  deleteQuestionList,
+} from "./redux/questionsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import { useEffect, useState } from "react";
@@ -16,8 +20,8 @@ function App() {
   const dispatch = useDispatch();
   const questionInput = useSelector((state: RootState) => state.input.value);
   const [questionList, setQuestionList] = useState<Question[]>(() => {
-    const storedQuestions = localStorage.getItem("questions");
-    return storedQuestions ? JSON.parse(storedQuestions) : [];
+    const storedQuestionList = localStorage.getItem("questions");
+    return storedQuestionList ? JSON.parse(storedQuestionList) : [];
   });
   const [newQuestion, setQuestion] = useState("");
   const [newAnswer, setAnswer] = useState("");
@@ -57,7 +61,7 @@ function App() {
   };
 
   const handleRemoveQuestionAndAnswer = (questionId: string) => {
-    dispatch(removeQuestion(questionId));
+    dispatch(deleteQuestion(questionId));
   };
 
   const sortQuestionList = () => {
@@ -78,7 +82,12 @@ function App() {
       }
     });
   };
-
+  const handleDeleteAllQuestions = () => {
+    dispatch(deleteQuestionList());
+    localStorage.setItem("questions", JSON.stringify([]));
+    setQuestionList([]);
+    setExpandedQuestions([]);
+  };
   return (
     <>
       <h1>The awesome Q/A tool</h1>
@@ -109,14 +118,16 @@ function App() {
         </ul>
       </div>
       <Button
+        ariaLabel="sort questions"
         children="Sort questions"
         color="blue"
         onClick={sortQuestionList}
       />
       <Button
-        children="Removed questions"
+        ariaLabel="removed questions"
+        children="Remove questions"
         color="red"
-        onClick={() => console.log("clicked")}
+        onClick={handleDeleteAllQuestions}
       />
       <div>
         <Tooltip text="This is a tooltip">
@@ -140,6 +151,7 @@ function App() {
         disabled={false}
       ></Input>
       <Button
+        ariaLabel="create question"
         children="Create question"
         color="green"
         onClick={handleAddQuestion}
