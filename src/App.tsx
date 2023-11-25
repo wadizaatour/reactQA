@@ -5,33 +5,65 @@ import { setValue } from "./redux/inputSlice";
 import { addQuestion, removeQuestion } from "./redux/questionsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Tooltip from "./components/tooltip/tooltip";
 function App() {
   const dispatch = useDispatch();
   const questionInput = useSelector((state: RootState) => state.input.value);
-  const questions = useSelector((state: RootState) => state.questions.list);
+  const [questionList, setQuestionList] = useState(() => {
+    const storedQuestions = localStorage.getItem("questions");
+    return storedQuestions ? JSON.parse(storedQuestions) : [];
+  });
   const [newQuestion, setQuestion] = useState("");
   const [newAnswer, setAnswer] = useState("");
   const [expandedQuestions, setExpandedQuestions] = useState<string[]>([]);
-  const handleQuestionChange = (newValue: string) => {
-    setQuestion(newValue);
+
+  useEffect(() => {
+    const storedQuestions = localStorage.getItem("questions");
+    if (storedQuestions) {
+      setQuestionList(JSON.parse(storedQuestions));
+    }
+  }, []);
+  const handleQuestionChange = (question: string) => {
+    setQuestion(question);
   };
-  const handleAnswerChange = (newValue: string) => {
-    setAnswer(newValue);
+
+  const handleAnswerChange = (answer: string) => {
+    setAnswer(answer);
   };
+
   const handleAddQuestion = () => {
     const trimmedValue =
       typeof questionInput === "string" ? questionInput.trim() : questionInput; //Clearing white space from string
     if (trimmedValue !== "") {
       dispatch(addQuestion(trimmedValue));
       dispatch(setValue(""));
+      setQuestionList((prevQuestions: any) => {
+        const updatedQuestionList = [
+          ...prevQuestions,
+          { id: Date.now().toString(), text: trimmedValue, answer: newAnswer },
+        ];
+        localStorage.setItem("questions", JSON.stringify(updatedQuestionList));
+        return updatedQuestionList;
+      });
       setQuestion("");
       setAnswer("");
     }
   };
+
   const handleRemoveQuestionAndAnswer = (questionId: string) => {
     dispatch(removeQuestion(questionId));
   };
+
+  const sortQuestionList = () => {
+    const sortedQuestions = [...questionList];
+    sortedQuestions.sort((a, b) =>
+      a.text.localeCompare(b.text, undefined, { sensitivity: "base" })
+    );
+    setExpandedQuestions([]);
+    setQuestionList(sortedQuestions);
+  };
+
   const toggleQuestionExpansion = (questionId: string) => {
     setExpandedQuestions((prevExpanded) => {
       if (prevExpanded.includes(questionId)) {
@@ -41,14 +73,17 @@ function App() {
       }
     });
   };
+
   return (
     <>
       <h1>The awesome Q/A tool</h1>
-      <h2> Created Question</h2>
+      <Tooltip text="This is a tooltip">
+        <h2> Created Question</h2>
+      </Tooltip>
       <div>
         <h3>Questions:</h3>
         <ul>
-          {questions.map((question) => (
+          {questionList.map((question: any) => (
             <li key={question.id}>
               <div
                 style={{ cursor: "pointer" }}
@@ -71,14 +106,18 @@ function App() {
       <Button
         children="Sort questions"
         color="blue"
-        onClick={() => console.log("clicked")}
+        onClick={sortQuestionList}
       />
       <Button
         children="Removed questions"
         color="red"
         onClick={() => console.log("clicked")}
       />
-      <h2> Create a new question</h2>
+      <div>
+        <Tooltip text="This is a tooltip">
+          <h2> Create a new question</h2>
+        </Tooltip>
+      </div>
       <Input
         type="text"
         label="Question"
