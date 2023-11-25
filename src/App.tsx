@@ -8,9 +8,14 @@ import { RootState } from "./redux/store";
 import { useEffect, useState } from "react";
 import Tooltip from "./components/tooltip/tooltip";
 function App() {
+  type Question = {
+    id: string;
+    text: string;
+    answer: string;
+  };
   const dispatch = useDispatch();
   const questionInput = useSelector((state: RootState) => state.input.value);
-  const [questionList, setQuestionList] = useState(() => {
+  const [questionList, setQuestionList] = useState<Question[]>(() => {
     const storedQuestions = localStorage.getItem("questions");
     return storedQuestions ? JSON.parse(storedQuestions) : [];
   });
@@ -19,9 +24,9 @@ function App() {
   const [expandedQuestions, setExpandedQuestions] = useState<string[]>([]);
 
   useEffect(() => {
-    const storedQuestions = localStorage.getItem("questions");
-    if (storedQuestions) {
-      setQuestionList(JSON.parse(storedQuestions));
+    const storedQuestionList = localStorage.getItem("questions");
+    if (storedQuestionList) {
+      setQuestionList(JSON.parse(storedQuestionList));
     }
   }, []);
   const handleQuestionChange = (question: string) => {
@@ -38,9 +43,9 @@ function App() {
     if (trimmedValue !== "") {
       dispatch(addQuestion(trimmedValue));
       dispatch(setValue(""));
-      setQuestionList((prevQuestions: any) => {
+      setQuestionList((previousQuestionList: Question[]) => {
         const updatedQuestionList = [
-          ...prevQuestions,
+          ...previousQuestionList,
           { id: Date.now().toString(), text: trimmedValue, answer: newAnswer },
         ];
         localStorage.setItem("questions", JSON.stringify(updatedQuestionList));
