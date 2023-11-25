@@ -96,7 +96,7 @@ function App() {
     <>
       <h1>The awesome Q/A tool</h1>
       <Tooltip text="This is a tooltip">
-        <h2> Created Question</h2>
+        <h2 aria-describedby="created-question"> Created Question</h2>
       </Tooltip>
       <div>
         <h3>Questions:</h3>
@@ -135,7 +135,7 @@ function App() {
       />
       <div>
         <Tooltip text="This is a tooltip">
-          <h2> Create a new question</h2>
+          <h2 aria-describedby="create-new-question"> Create a new question</h2>
         </Tooltip>
       </div>
       <Input
