@@ -1,8 +1,4 @@
-Certainly! Below is a sample README file for a React app that uses Redux Toolkit to add questions from an input and display them in a list. This README assumes you have already set up a basic React app and installed the necessary dependencies.
-
----
-
-# Studocu React App
+# Question and Answer React App
 
 ## Table of Contents
 
