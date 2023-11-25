@@ -11,11 +11,11 @@ function App() {
   const questionInput = useSelector((state: RootState) => state.input.value);
   const questions = useSelector((state: RootState) => state.questions.list);
   const [newQuestion, setQuestion] = useState("");
+  const [newAnswer, setAnswer] = useState("");
+  const [expandedQuestions, setExpandedQuestions] = useState<string[]>([]);
   const handleQuestionChange = (newValue: string) => {
     setQuestion(newValue);
   };
-  // State for creating a new answer
-  const [newAnswer, setAnswer] = useState("");
   const handleAnswerChange = (newValue: string) => {
     setAnswer(newValue);
   };
@@ -32,6 +32,15 @@ function App() {
   const handleRemoveQuestionAndAnswer = (questionId: string) => {
     dispatch(removeQuestion(questionId));
   };
+  const toggleQuestionExpansion = (questionId: string) => {
+    setExpandedQuestions((prevExpanded) => {
+      if (prevExpanded.includes(questionId)) {
+        return prevExpanded.filter((id) => id !== questionId);
+      } else {
+        return [...prevExpanded, questionId];
+      }
+    });
+  };
   return (
     <>
       <h1>The awesome Q/A tool</h1>
@@ -41,7 +50,15 @@ function App() {
         <ul>
           {questions.map((question) => (
             <li key={question.id}>
-              {question.text}
+              <div
+                style={{ cursor: "pointer" }}
+                onClick={() => toggleQuestionExpansion(question.id)}
+              >
+                {question.text}
+              </div>
+              {expandedQuestions.includes(question.id) && (
+                <div>Answer: {question.answer}</div>
+              )}
               <button
                 onClick={() => handleRemoveQuestionAndAnswer(question.id)}
               >
