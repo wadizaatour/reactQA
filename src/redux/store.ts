@@ -1,12 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
-import inputReducer from './inputSlice';
-import questionsReducer from './questionsSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import questionsReducer from "./questionsSlice";
 
 const store = configureStore({
-    reducer: {
-        input: inputReducer,
-        questions: questionsReducer,
-    },
+  reducer: {
+    questions: questionsReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
