@@ -1,44 +1,19 @@
-import Button from "./components/button/button";
-import Input from "./components/input/input";
 import QuestionList from "./components/questionList/questionList";
 import "./App.css";
-import { setValue } from "./redux/inputSlice";
-import { addQuestion, setAllQuestionList } from "./redux/questionsSlice";
+import { setAllQuestionList } from "./redux/questionsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "./redux/store";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Tooltip from "./components/tooltip/tooltip";
+import Form from "./components/form/Form";
+import { getQuestionsList } from "./redux/selectors";
+
 function App() {
   const dispatch = useDispatch();
-
-  const questionsState = useSelector(
-    (state: RootState) => state.questions.list
-  );
-  const intialQuestionState = { question: "", answer: "" };
-  const [questionItem, setQuestionItem] = useState(intialQuestionState);
+  const questionsState = useSelector(getQuestionsList);
 
   useEffect(() => {
     dispatch(setAllQuestionList());
   }, []);
-
-  const handleQuestionChange = (question: string) => {
-    setQuestionItem({ ...questionItem, question });
-  };
-
-  const handleAnswerChange = (answer: string) => {
-    setQuestionItem({ ...questionItem, answer });
-  };
-
-  const handleAddQuestion = () => {
-    const trimmedValue = questionItem.question.trim();
-    if (trimmedValue !== "") {
-      dispatch(
-        addQuestion({ question: trimmedValue, answer: questionItem.answer })
-      );
-      dispatch(setValue(""));
-      setQuestionItem(intialQuestionState);
-    }
-  };
 
   return (
     <>
@@ -46,34 +21,13 @@ function App() {
       <Tooltip text="This is a tooltip">
         <h2 aria-describedby="created-question"> Created Question</h2>
       </Tooltip>
-      <QuestionList list={questionsState}></QuestionList>
+      <QuestionList list={questionsState} />
       <div>
         <Tooltip text="This is a tooltip">
           <h2 aria-describedby="create-new-question"> Create a new question</h2>
         </Tooltip>
       </div>
-      <Input
-        type="text"
-        label="Question"
-        value={questionItem.question}
-        placeholder=""
-        onChange={handleQuestionChange}
-        disabled={false}
-      ></Input>
-      <Input
-        type="text"
-        label="Answer"
-        value={questionItem.answer}
-        placeholder=""
-        onChange={handleAnswerChange}
-        disabled={false}
-      ></Input>
-      <Button
-        ariaLabel="create question"
-        children="Create question"
-        color="green"
-        onClick={handleAddQuestion}
-      />
+      <Form />
     </>
   );
 }
