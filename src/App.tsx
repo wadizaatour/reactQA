@@ -3,27 +3,31 @@ import Input from "./components/input/input";
 import "./App.css";
 import { setValue } from "./redux/inputSlice";
 import {
+  Question,
   addQuestion,
   deleteQuestion,
-  deleteQuestionList,
+  deleteAll,
 } from "./redux/questionsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import { useEffect, useState } from "react";
 import Tooltip from "./components/tooltip/tooltip";
 function App() {
-  type Question = {
-    id: string;
-    text: string;
-    answer: string;
-  };
-
   const dispatch = useDispatch();
-  const questionInput = useSelector((state: RootState) => state.input.value);
-  const [questionList, setQuestionList] = useState<Question[]>(() => {
+  const questionInputValue = useSelector(
+    (state: RootState) => state.input.value
+  );
+  const questionsState = useSelector(
+    (state: RootState) => state.questions.list
+  );
+  const getQuestionListFromStorage = () => {
     const storedQuestionList = localStorage.getItem("questions");
     return storedQuestionList ? JSON.parse(storedQuestionList) : [];
-  });
+  };
+  const [questionList, setQuestionList] = useState<Question[]>(() =>
+    getQuestionListFromStorage()
+  );
+
   const [newQuestion, setQuestion] = useState("");
   const [newAnswer, setAnswer] = useState("");
   const [expandedQuestions, setExpandedQuestions] = useState<string[]>([]);
@@ -42,21 +46,24 @@ function App() {
   const handleAnswerChange = (answer: string) => {
     setAnswer(answer);
   };
-
+  const addToQuestionList = (previousQuestionList: Question[]) => {
+    const newQuestionList = [
+      ...previousQuestionList,
+      { id: Date.now().toString(), question: newQuestion, answer: newAnswer },
+    ];
+    localStorage.setItem("questions", JSON.stringify(newQuestionList));
+    return newQuestionList;
+  };
   const handleAddQuestion = () => {
-    const trimmedValue =
-      typeof questionInput === "string" ? questionInput.trim() : questionInput; //Clearing white space from string
+    const trimmedValue = questionInputValue.trim();
     if (trimmedValue !== "") {
       dispatch(addQuestion(trimmedValue));
       dispatch(setValue(""));
-      setQuestionList((previousQuestionList: Question[]) => {
-        const updatedQuestionList = [
-          ...previousQuestionList,
-          { id: Date.now().toString(), text: trimmedValue, answer: newAnswer },
-        ];
-        localStorage.setItem("questions", JSON.stringify(updatedQuestionList));
-        return updatedQuestionList;
-      });
+
+      setQuestionList((previousQuestionList: Question[]) =>
+        addToQuestionList(previousQuestionList)
+      );
+
       setQuestion("");
       setAnswer("");
     }
@@ -65,11 +72,16 @@ function App() {
   const handleRemoveQuestionAndAnswer = (questionId: string) => {
     dispatch(deleteQuestion(questionId));
   };
+  const handleDeleteAllQuestions = () => {
+    dispatch(deleteAll());
+    setQuestionList([]);
+    setExpandedQuestions([]);
+  };
 
   const sortQuestionList = () => {
     const sortedQuestions = [...questionList];
     sortedQuestions.sort((a, b) =>
-      a.text.localeCompare(b.text, undefined, { sensitivity: "base" })
+      a.question.localeCompare(b.question, undefined, { sensitivity: "base" })
     );
     setExpandedQuestions([]);
     setQuestionList(sortedQuestions);
@@ -85,13 +97,6 @@ function App() {
     });
   };
 
-  const handleDeleteAllQuestions = () => {
-    dispatch(deleteQuestionList());
-    localStorage.setItem("questions", JSON.stringify([]));
-    setQuestionList([]);
-    setExpandedQuestions([]);
-  };
-
   return (
     <>
       <h1>The awesome Q/A tool</h1>
@@ -101,19 +106,19 @@ function App() {
       <div>
         <h3>Questions:</h3>
         <ul>
-          {questionList.map((question: any) => (
-            <li key={question.id}>
+          {questionsState.map((questionItem: any) => (
+            <li key={questionItem.id}>
               <div
                 style={{ cursor: "pointer" }}
-                onClick={() => toggleQuestionExpansion(question.id)}
+                onClick={() => toggleQuestionExpansion(questionItem.id)}
               >
-                {question.text}
+                {questionItem.question}
               </div>
-              {expandedQuestions.includes(question.id) && (
-                <div>Answer: {question.answer}</div>
+              {expandedQuestions.includes(questionItem.id) && (
+                <div>Answer: {questionItem.answer}</div>
               )}
               <button
-                onClick={() => handleRemoveQuestionAndAnswer(question.id)}
+                onClick={() => handleRemoveQuestionAndAnswer(questionItem.id)}
               >
                 Remove
               </button>
