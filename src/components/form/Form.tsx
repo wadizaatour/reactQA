@@ -1,69 +1,79 @@
-import { useDispatch } from "react-redux";
-import Input from "../input/Input";
-import { FormEvent, useRef, useState } from "react";
-import { addQuestion, updateQuestion } from "../../redux/questionsSlice";
-import Button from "../button/Button";
-import { debounce } from "../../utils/debounce";
+import { useDispatch } from 'react-redux'
+import Input from '../input/Input'
+import { type FormEvent, useRef, useState } from 'react'
+import { addQuestion, updateQuestion } from '../../redux/questionsSlice'
+import Button from '../button/Button'
+import { debounce } from '../../utils/debounce'
 interface FormProps {
-  type: "add" | "update";
-  questionId?: string;
+  type: 'add' | 'update'
+  questionId?: string
 }
 
 const Form = ({ type, questionId }: FormProps) => {
-  const dispatch = useDispatch();
-  const isAddForm = type === "add";
-  const submitLabel = isAddForm ? "create question" : "update question";
-  const intialQuestionState = { question: "", answer: "" };
-  const [questionItem, setQuestionItem] = useState(intialQuestionState);
+  const dispatch = useDispatch()
+  const isAddForm = type === 'add'
+  const submitLabel = isAddForm ? 'create question' : 'update question'
+  const intialQuestionState = { question: '', answer: '' }
+  const [questionItem, setQuestionItem] = useState(intialQuestionState)
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null)
   const handleQuestionChange = (question: string) => {
-    setQuestionItem({ ...questionItem, question });
-  };
+    setQuestionItem({ ...questionItem, question })
+  }
 
   const handleAnswerChange = (answer: string) => {
-    setQuestionItem({ ...questionItem, answer });
-  };
-  const clearForm = () => setQuestionItem(intialQuestionState);
-  const validateForm = () => {
-    const trimmedQuestion = questionItem.question.trim();
-    if (trimmedQuestion !== "") {
-      dispatch(
-        addQuestion({ question: trimmedQuestion, answer: questionItem.answer })
-      );
+    setQuestionItem({ ...questionItem, answer })
+  }
+  const clearForm = () => {
+    if (inputRef.current?.checked === true) {
+      inputRef.current.checked = false
     }
-    clearForm();
-  };
+
+    setQuestionItem(intialQuestionState)
+  }
+
+  const validateForm = () => {
+    const trimmedQuestion = questionItem.question.trim()
+    if (trimmedQuestion !== '') {
+      dispatch(
+        addQuestion({
+          question: trimmedQuestion,
+          answer: questionItem.answer
+        })
+      )
+    }
+    clearForm()
+  }
 
   const handleAddQuestion = () => {
-    if (inputRef.current?.checked) {
-      const debouncedUpdate = debounce(validateForm, 5000);
-      debouncedUpdate();
+    if (inputRef.current?.checked === true) {
+      const debouncedUpdate = debounce(validateForm, 5000)
+      debouncedUpdate()
     } else {
-      validateForm();
+      validateForm()
     }
-  };
+  }
   const handleUpdateQuestion = () => {
-    if (questionId) {
+    if (questionId !== undefined) {
       dispatch(
         updateQuestion({
           id: questionId,
           question: questionItem.question,
-          answer: questionItem.answer,
+          answer: questionItem.answer
         })
-      );
-      clearForm();
+      )
+      clearForm()
     }
-  };
+  }
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (type === "add") {
-      return handleAddQuestion();
+    event.preventDefault()
+    if (type === 'add') {
+      handleAddQuestion()
     } else {
-      return handleUpdateQuestion();
+      handleUpdateQuestion()
     }
-  };
+  }
 
   return (
     <form onSubmit={submitHandler}>
@@ -100,7 +110,7 @@ const Form = ({ type, questionId }: FormProps) => {
         {submitLabel}
       </Button>
     </form>
-  );
-};
+  )
+}
 
-export default Form;
+export default Form

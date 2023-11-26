@@ -1,11 +1,11 @@
-import { ChangeEvent } from "react";
+import { type ChangeEvent } from 'react'
 interface InputProps {
-  type: "text" | "password" | "email"; // specify allowed input types
-  label: string;
-  value: string;
-  placeholder?: string;
-  onChange: (value: string) => void;
-  disabled?: boolean;
+  type: 'text' | 'password' | 'email' // specify allowed input types
+  label: string
+  value: string
+  placeholder?: string
+  onChange: (value: string) => void
+  disabled?: boolean
 }
 
 const Input = ({
@@ -14,14 +14,14 @@ const Input = ({
   placeholder,
   onChange,
   value,
-  disabled = false,
+  disabled = false
 }: InputProps) => {
-  const lowercaseLabel = label.toLowerCase();
+  const lowercaseLabel = label.toLowerCase()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    onChange(newValue);
-  };
+    const newValue = e.target.value
+    onChange(newValue)
+  }
 
   return (
     <div className="input-wrapper">
@@ -38,7 +38,7 @@ const Input = ({
         />
       </label>
     </div>
-  );
-};
+  )
+}
 
-export default Input;
+export default Input

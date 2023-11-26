@@ -1,17 +1,17 @@
 interface ButtonProps {
-  ariaLabel: string;
-  children: string;
-  color: string;
-  type: "submit" | "button";
-  onClick?: () => void;
+  ariaLabel: string
+  children: string
+  color: string
+  type: 'submit' | 'button'
+  onClick?: () => void
 }
 
 const Button = ({ ariaLabel, children, color, type, onClick }: ButtonProps) => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (e.key === "Enter" || e.key === " ") {
-      onClick?.();
+    if (e.key === 'Enter' || e.key === ' ') {
+      onClick?.()
     }
-  };
+  }
 
   return (
     <button
@@ -21,12 +21,12 @@ const Button = ({ ariaLabel, children, color, type, onClick }: ButtonProps) => {
       onClick={onClick}
       onKeyDown={handleKeyDown}
       style={{
-        backgroundColor: color,
+        backgroundColor: color
       }}
     >
       {children}
     </button>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

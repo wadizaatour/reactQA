@@ -1,21 +1,21 @@
-import { useState, ReactNode } from "react";
-import "./Tooltip.css";
+import { useState, type ReactNode } from 'react'
+import './Tooltip.css'
 
 interface TooltipProps {
-  children: ReactNode; //ReactNode is to allow any valid JSX content to be passed as children to the Tooltip
-  text: string;
+  children: ReactNode // ReactNode is to allow any valid JSX content to be passed as children to the Tooltip
+  text: string
 }
 
 const Tooltip = ({ children, text }: TooltipProps) => {
-  const [isTooltipVisible, setTooltipVisible] = useState(false);
+  const [isTooltipVisible, setTooltipVisible] = useState(false)
 
   const handleMouseEnter = () => {
-    setTooltipVisible(true);
-  };
+    setTooltipVisible(true)
+  }
 
   const handleMouseLeave = () => {
-    setTooltipVisible(false);
-  };
+    setTooltipVisible(false)
+  }
 
   return (
     <div
@@ -26,7 +26,7 @@ const Tooltip = ({ children, text }: TooltipProps) => {
       {children}
       {isTooltipVisible && <div className="tooltip">{text}</div>}
     </div>
-  );
-};
+  )
+}
 
-export default Tooltip;
+export default Tooltip

@@ -1,33 +1,33 @@
-import { memo } from "react";
+import { memo } from 'react'
 import {
-  Question,
+  type Question,
   deleteAll,
-  sortQuestionList,
-} from "../../redux/questionsSlice";
-import { useDispatch } from "react-redux";
-import Button from "../button/Button";
-import QuestionItem from "../questionItem/QuestionItem";
+  sortQuestionList
+} from '../../redux/questionsSlice'
+import { useDispatch } from 'react-redux'
+import Button from '../button/Button'
+import QuestionItem from '../questionItem/QuestionItem'
 
 interface QuestionListProps {
-  list: Question[];
+  list: Question[]
 }
 
 const QuestionList = ({ list }: QuestionListProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleDeleteAllQuestions = () => {
-    dispatch(deleteAll());
-  };
+    dispatch(deleteAll())
+  }
 
   const handleSort = () => {
-    dispatch(sortQuestionList());
-  };
+    dispatch(sortQuestionList())
+  }
 
   return (
     <section>
       <h3>Questions:</h3>
       <ul>
-        {list?.map((questionItem: any) => (
+        {list?.map((questionItem: Question) => (
           <li key={questionItem.id}>
             <QuestionItem item={questionItem} />
           </li>
@@ -52,7 +52,7 @@ const QuestionList = ({ list }: QuestionListProps) => {
         </Button>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default memo(QuestionList);
+export default memo(QuestionList)

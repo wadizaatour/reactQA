@@ -1,19 +1,19 @@
-import QuestionList from "./components/questionList/QuestionList";
-import "./App.css";
-import { setAllQuestionList } from "./redux/questionsSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import Tooltip from "./components/tooltip/Tooltip";
-import Form from "./components/form/Form";
-import { getQuestionsList } from "./redux/selectors";
+import QuestionList from './components/questionList/QuestionList'
+import './App.css'
+import { setAllQuestionList } from './redux/questionsSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import Tooltip from './components/tooltip/Tooltip'
+import Form from './components/form/Form'
+import { getQuestionsList } from './redux/selectors'
 
 function App() {
-  const dispatch = useDispatch();
-  const questionsState = useSelector(getQuestionsList);
+  const dispatch = useDispatch()
+  const questionsState = useSelector(getQuestionsList)
 
   useEffect(() => {
-    dispatch(setAllQuestionList());
-  }, []);
+    dispatch(setAllQuestionList())
+  }, [dispatch])
 
   return (
     <>
@@ -36,9 +36,9 @@ function App() {
           <Form type="add" />
         </section>
       </main>
-      <footer> Footer </footer>
+      <footer> </footer>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
