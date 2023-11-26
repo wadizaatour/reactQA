@@ -11,6 +11,7 @@ const Button = ({ ariaLabel, children, color, onClick }: ButtonProps) => {
       onClick();
     }
   };
+  
   return (
     <button
       role="button"

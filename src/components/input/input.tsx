@@ -19,6 +19,7 @@ const Input = ({
   disabled = false,
 }: InputProps) => {
   const dispatch = useDispatch();
+  
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     onChange(newValue);
