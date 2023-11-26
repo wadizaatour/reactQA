@@ -3,10 +3,11 @@ import Input from "./components/input/input";
 import "./App.css";
 import { setValue } from "./redux/inputSlice";
 import {
-  Question,
   addQuestion,
   deleteQuestion,
   deleteAll,
+  setAllQuestionList,
+  sortQuestionList,
 } from "./redux/questionsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
@@ -14,29 +15,17 @@ import { useEffect, useState } from "react";
 import Tooltip from "./components/tooltip/tooltip";
 function App() {
   const dispatch = useDispatch();
-  const questionInputValue = useSelector(
-    (state: RootState) => state.input.value
-  );
+
   const questionsState = useSelector(
     (state: RootState) => state.questions.list
   );
-  const getQuestionListFromStorage = () => {
-    const storedQuestionList = localStorage.getItem("questions");
-    return storedQuestionList ? JSON.parse(storedQuestionList) : [];
-  };
-  const [questionList, setQuestionList] = useState<Question[]>(() =>
-    getQuestionListFromStorage()
-  );
-
+  console.log(questionsState);
   const [newQuestion, setQuestion] = useState("");
   const [newAnswer, setAnswer] = useState("");
   const [expandedQuestions, setExpandedQuestions] = useState<string[]>([]);
 
   useEffect(() => {
-    const storedQuestionList = localStorage.getItem("questions");
-    if (storedQuestionList) {
-      setQuestionList(JSON.parse(storedQuestionList));
-    }
+    dispatch(setAllQuestionList());
   }, []);
 
   const handleQuestionChange = (question: string) => {
@@ -46,24 +35,12 @@ function App() {
   const handleAnswerChange = (answer: string) => {
     setAnswer(answer);
   };
-  const addToQuestionList = (previousQuestionList: Question[]) => {
-    const newQuestionList = [
-      ...previousQuestionList,
-      { id: Date.now().toString(), question: newQuestion, answer: newAnswer },
-    ];
-    localStorage.setItem("questions", JSON.stringify(newQuestionList));
-    return newQuestionList;
-  };
+
   const handleAddQuestion = () => {
-    const trimmedValue = questionInputValue.trim();
+    const trimmedValue = newQuestion.trim();
     if (trimmedValue !== "") {
-      dispatch(addQuestion(trimmedValue));
+      dispatch(addQuestion({ question: trimmedValue, answer: newAnswer }));
       dispatch(setValue(""));
-
-      setQuestionList((previousQuestionList: Question[]) =>
-        addToQuestionList(previousQuestionList)
-      );
-
       setQuestion("");
       setAnswer("");
     }
@@ -74,17 +51,12 @@ function App() {
   };
   const handleDeleteAllQuestions = () => {
     dispatch(deleteAll());
-    setQuestionList([]);
     setExpandedQuestions([]);
   };
 
-  const sortQuestionList = () => {
-    const sortedQuestions = [...questionList];
-    sortedQuestions.sort((a, b) =>
-      a.question.localeCompare(b.question, undefined, { sensitivity: "base" })
-    );
+  const handleSort = () => {
     setExpandedQuestions([]);
-    setQuestionList(sortedQuestions);
+    dispatch(sortQuestionList());
   };
 
   const toggleQuestionExpansion = (questionId: string) => {
@@ -106,7 +78,7 @@ function App() {
       <div>
         <h3>Questions:</h3>
         <ul>
-          {questionsState.map((questionItem: any) => (
+          {questionsState?.map((questionItem: any) => (
             <li key={questionItem.id}>
               <div
                 style={{ cursor: "pointer" }}
@@ -130,7 +102,7 @@ function App() {
         ariaLabel="sort questions"
         children="Sort questions"
         color="blue"
-        onClick={sortQuestionList}
+        onClick={handleSort}
       />
       <Button
         ariaLabel="removed questions"

@@ -1,4 +1,4 @@
-import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface Question {
   id: string;
@@ -9,7 +9,6 @@ export interface Question {
 interface QuestionsState {
   list: Question[];
 }
-
 const initialState: QuestionsState = {
   list: [],
 };
@@ -18,12 +17,27 @@ const questionsSlice = createSlice({
   name: "questions",
   initialState,
   reducers: {
-    addQuestion(state, action: PayloadAction<string>) {
+    setAllQuestionList(state) {
+      const storedQuestionList = localStorage.getItem("questions");
+      state.list = storedQuestionList ? JSON.parse(storedQuestionList) : [];
+    },
+    sortQuestionList(state) {
+      state.list.sort((a, b) =>
+        a.question.localeCompare(b.question, undefined, { sensitivity: "base" })
+      );
+    },
+    addQuestion(
+      state,
+      action: PayloadAction<{ question: string; answer: string }>
+    ) {
       const newQuestion: Question = {
         id: Date.now().toString(),
-        question: action.payload,
+        question: action.payload.question,
+        answer: action.payload.answer,
       };
+
       state.list.push(newQuestion);
+      localStorage.setItem("questions", JSON.stringify(state.list));
     },
     deleteQuestion(state, action: PayloadAction<string>) {
       const filteredArray = state.list.filter((q) => q.id !== action.payload);
@@ -48,6 +62,12 @@ const questionsSlice = createSlice({
   },
 });
 
-export const { addQuestion, deleteQuestion, deleteAll, setAnswer } =
-  questionsSlice.actions;
+export const {
+  setAllQuestionList,
+  sortQuestionList,
+  addQuestion,
+  deleteQuestion,
+  deleteAll,
+  setAnswer,
+} = questionsSlice.actions;
 export default questionsSlice.reducer;
