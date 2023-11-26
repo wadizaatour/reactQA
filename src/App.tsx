@@ -17,17 +17,26 @@ function App() {
 
   return (
     <>
-      <h1>The awesome Q/A tool</h1>
-      <Tooltip text="This is a tooltip">
-        <h2 aria-describedby="created-question"> Created Question</h2>
-      </Tooltip>
-      <QuestionList list={questionsState} />
-      <div>
-        <Tooltip text="This is a tooltip">
-          <h2 aria-describedby="create-new-question"> Create a new question</h2>
-        </Tooltip>
-      </div>
-      <Form type="add" />
+      <header>
+        <h1>The awesome Q/A tool</h1>
+      </header>
+      <main>
+        <section>
+          <Tooltip text="This is a tooltip">
+            <h2 aria-describedby="created-question"> Created Question</h2>
+          </Tooltip>
+          <QuestionList list={questionsState} />
+        </section>
+        <section>
+          <Tooltip text="This is a tooltip">
+            <h2 aria-describedby="create-new-question">
+              Create a new question
+            </h2>
+          </Tooltip>
+          <Form type="add" />
+        </section>
+      </main>
+      <footer> Footer </footer>
     </>
   );
 }

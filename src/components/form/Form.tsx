@@ -12,7 +12,7 @@ interface FormProps {
 const Form = ({ type, questionId }: FormProps) => {
   const dispatch = useDispatch();
   const isAddForm = type === "add";
-  const submitLabel = isAddForm ? "create" : "update";
+  const submitLabel = isAddForm ? "create question" : "update question";
   const intialQuestionState = { question: "", answer: "" };
   const [questionItem, setQuestionItem] = useState(intialQuestionState);
 
@@ -84,17 +84,20 @@ const Form = ({ type, questionId }: FormProps) => {
         value={questionItem.answer}
       />
       {isAddForm && (
-        <input
-          ref={inputRef}
-          type="checkbox"
-          placeholder=""
-          disabled={false}
-          value={questionItem.answer}
-        />
+        <label>
+          <input
+            aria-label="debounce add question"
+            name="checkbox"
+            ref={inputRef}
+            type="checkbox"
+            disabled={false}
+            value={questionItem.answer}
+          />
+        </label>
       )}
 
       <Button type="submit" ariaLabel={submitLabel} color="green">
-        {`${submitLabel} question`}
+        {submitLabel}
       </Button>
     </form>
   );
