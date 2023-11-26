@@ -14,7 +14,7 @@ const Input = ({
   type,
   label,
   value,
-  placeholder = "",
+  placeholder,
   onChange,
   disabled = false,
 }: InputProps) => {
@@ -29,6 +29,7 @@ const Input = ({
     <div className="input-wrapper">
       <label htmlFor={label}>{label}</label>
       <input
+        aria-labelledby={label.toLowerCase()}
         type={type}
         id={label.toLowerCase()} // Use lowercase label as ID
         value={value}
