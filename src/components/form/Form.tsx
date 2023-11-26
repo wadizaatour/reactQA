@@ -70,12 +70,9 @@ const Form = ({ type, questionId }: FormProps) => {
         disabled={false}
         value={questionItem.answer}
       />
-      <Button
-        type="submit"
-        ariaLabel="create question"
-        children="Create question"
-        color="green"
-      />
+      <Button type="submit" ariaLabel="Create question" color="green">
+        Create question
+      </Button>
     </form>
   );
 };

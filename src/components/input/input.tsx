@@ -25,16 +25,18 @@ const Input = ({
 
   return (
     <div className="input-wrapper">
-      <label htmlFor={label}>{label}</label>
-      <input
-        aria-labelledby={lowercaseLabel}
-        type={type}
-        id={lowercaseLabel} // Use lowercase label as ID
-        value={value}
-        placeholder={placeholder}
-        onChange={handleChange}
-        disabled={disabled}
-      />
+      <label htmlFor={label}>
+        {label}
+        <input
+          aria-labelledby={lowercaseLabel}
+          type={type}
+          id={lowercaseLabel} // Use lowercase label as ID
+          value={value}
+          placeholder={placeholder}
+          onChange={handleChange}
+          disabled={disabled}
+        />
+      </label>
     </div>
   );
 };

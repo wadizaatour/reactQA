@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Question, deleteQuestion } from "../../redux/questionsSlice";
 import Form from "../../components/form/Form";
+import Button from "../button/Button";
 
 interface QuestionItemProps {
   item: Question;
@@ -18,17 +19,29 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
     setIsExpanded(!isExpanded);
   };
 
+  const expandLabel = isExpanded ? "-" : "+";
+
   return (
     <>
       <span>{item.question}</span>
       {isExpanded && <p>Answer: {item.answer}</p>}
-      <button onClick={() => toggleQuestionExpansion()}>
-        {isExpanded ? "-" : "+"}
-      </button>
+      <Button
+        ariaLabel={expandLabel}
+        color="#757575"
+        type="button"
+        onClick={() => toggleQuestionExpansion()}
+      >
+        {expandLabel}
+      </Button>
       {isExpanded && <Form type="update" questionId={item.id} />}
-      <button onClick={() => handleRemoveQuestionAndAnswer(item.id)}>
+      <Button
+        ariaLabel="Remove"
+        color="#757575"
+        type="button"
+        onClick={() => handleRemoveQuestionAndAnswer(item.id)}
+      >
         Remove
-      </button>
+      </Button>
     </>
   );
 };
