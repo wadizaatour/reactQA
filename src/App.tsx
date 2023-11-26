@@ -19,7 +19,6 @@ function App() {
   const questionsState = useSelector(
     (state: RootState) => state.questions.list
   );
-  console.log(questionsState);
   const [newQuestion, setQuestion] = useState("");
   const [newAnswer, setAnswer] = useState("");
   const [expandedQuestions, setExpandedQuestions] = useState<string[]>([]);
