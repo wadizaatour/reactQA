@@ -1,10 +1,14 @@
 import { useDispatch } from "react-redux";
-import Input from "../input/input";
-import { useState } from "react";
-import { addQuestion } from "../../redux/questionsSlice";
-import Button from "../button/button";
+import Input from "../input/Input";
+import { FormEvent, useState } from "react";
+import { addQuestion, updateQuestion } from "../../redux/questionsSlice";
+import Button from "../button/Button";
+interface FormProps {
+  type: "add" | "update";
+  questionId?: string;
+}
 
-const Form = () => {
+const Form = ({ type, questionId }: FormProps) => {
   const dispatch = useDispatch();
   const intialQuestionState = { question: "", answer: "" };
   const [questionItem, setQuestionItem] = useState(intialQuestionState);
@@ -16,19 +20,40 @@ const Form = () => {
   const handleAnswerChange = (answer: string) => {
     setQuestionItem({ ...questionItem, answer });
   };
-
+  const clearForm = () => setQuestionItem(intialQuestionState);
   const handleAddQuestion = () => {
-    const trimmedValue = questionItem.question.trim();
-    if (trimmedValue !== "") {
+    const trimmedQuestion = questionItem.question.trim();
+    if (trimmedQuestion !== "") {
       dispatch(
-        addQuestion({ question: trimmedValue, answer: questionItem.answer })
+        addQuestion({ question: trimmedQuestion, answer: questionItem.answer })
       );
-      setQuestionItem(intialQuestionState);
+      clearForm();
+    }
+  };
+  const handleUpdateQuestion = () => {
+    if (questionId) {
+      dispatch(
+        updateQuestion({
+          id: questionId,
+          question: questionItem.question,
+          answer: questionItem.answer,
+        })
+      );
+      clearForm();
+    }
+  };
+
+  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (type === "add") {
+      return handleAddQuestion();
+    } else {
+      return handleUpdateQuestion();
     }
   };
 
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <Input
         type="text"
         label="Question"
@@ -46,10 +71,10 @@ const Form = () => {
         value={questionItem.answer}
       />
       <Button
+        type="submit"
         ariaLabel="create question"
         children="Create question"
         color="green"
-        onClick={handleAddQuestion}
       />
     </form>
   );

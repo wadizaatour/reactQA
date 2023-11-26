@@ -1,12 +1,12 @@
-import { memo, useState } from "react";
+import { memo } from "react";
 import {
   Question,
   deleteAll,
-  deleteQuestion,
   sortQuestionList,
 } from "../../redux/questionsSlice";
 import { useDispatch } from "react-redux";
-import Button from "../button/button";
+import Button from "../button/Button";
+import QuestionItem from "../questionItem/QuestionItem";
 
 interface QuestionListProps {
   list: Question[];
@@ -14,28 +14,12 @@ interface QuestionListProps {
 
 const QuestionList = ({ list }: QuestionListProps) => {
   const dispatch = useDispatch();
-  const [expandedQuestions, setExpandedQuestions] = useState<string[]>([]);
 
-  const toggleQuestionExpansion = (questionId: string) => {
-    setExpandedQuestions((prevExpanded) => {
-      if (prevExpanded.includes(questionId)) {
-        return prevExpanded.filter((id) => id !== questionId);
-      } else {
-        return [...prevExpanded, questionId];
-      }
-    });
-  };
-
-  const handleRemoveQuestionAndAnswer = (questionId: string) => {
-    dispatch(deleteQuestion(questionId));
-  };
   const handleDeleteAllQuestions = () => {
     dispatch(deleteAll());
-    setExpandedQuestions([]);
   };
 
   const handleSort = () => {
-    setExpandedQuestions([]);
     dispatch(sortQuestionList());
   };
 
@@ -45,31 +29,20 @@ const QuestionList = ({ list }: QuestionListProps) => {
       <ul>
         {list?.map((questionItem: any) => (
           <li key={questionItem.id}>
-            <div
-              style={{ cursor: "pointer" }}
-              onClick={() => toggleQuestionExpansion(questionItem.id)}
-            >
-              {questionItem.question}
-            </div>
-            {expandedQuestions.includes(questionItem.id) && (
-              <div>Answer: {questionItem.answer}</div>
-            )}
-            <button
-              onClick={() => handleRemoveQuestionAndAnswer(questionItem.id)}
-            >
-              Remove
-            </button>
+            <QuestionItem item={questionItem} />
           </li>
         ))}
       </ul>
       <div>
         <Button
+          type="button"
           ariaLabel="sort questions"
           children="Sort questions"
           color="blue"
           onClick={handleSort}
         />
         <Button
+          type="button"
           ariaLabel="removed questions"
           children="Remove questions"
           color="red"

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 
 export interface Question {
   id: string;
@@ -25,6 +25,19 @@ const questionsSlice = createSlice({
       state.list.sort((a, b) =>
         a.question.localeCompare(b.question, undefined, { sensitivity: "base" })
       );
+    },
+    updateQuestion(state, action: PayloadAction<Question>) {
+      state.list = state.list.map((item) => {
+        if (item.id === action.payload.id) {
+          return {
+            ...item,
+            question: action.payload.question,
+            answer: action.payload.answer,
+          };
+        }
+        return item;
+      });
+      localStorage.setItem("questions", JSON.stringify(state.list));
     },
     addQuestion(
       state,
@@ -69,5 +82,6 @@ export const {
   deleteQuestion,
   deleteAll,
   setAnswer,
+  updateQuestion,
 } = questionsSlice.actions;
 export default questionsSlice.reducer;

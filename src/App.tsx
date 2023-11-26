@@ -1,9 +1,9 @@
-import QuestionList from "./components/questionList/questionList";
+import QuestionList from "./components/questionList/QuestionList";
 import "./App.css";
 import { setAllQuestionList } from "./redux/questionsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import Tooltip from "./components/tooltip/tooltip";
+import Tooltip from "./components/tooltip/Tooltip";
 import Form from "./components/form/Form";
 import { getQuestionsList } from "./redux/selectors";
 
@@ -27,7 +27,7 @@ function App() {
           <h2 aria-describedby="create-new-question"> Create a new question</h2>
         </Tooltip>
       </div>
-      <Form />
+      <Form type="add" />
     </>
   );
 }
