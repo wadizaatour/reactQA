@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux";
 import Input from "../input/Input";
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { addQuestion, updateQuestion } from "../../redux/questionsSlice";
 import Button from "../button/Button";
+import { debounce } from "../../utils/debounce";
 interface FormProps {
   type: "add" | "update";
   questionId?: string;
@@ -10,9 +11,12 @@ interface FormProps {
 
 const Form = ({ type, questionId }: FormProps) => {
   const dispatch = useDispatch();
+  const isAddForm = type === "add";
+  const submitLabel = isAddForm ? "create" : "update";
   const intialQuestionState = { question: "", answer: "" };
   const [questionItem, setQuestionItem] = useState(intialQuestionState);
 
+  const inputRef = useRef<HTMLInputElement>(null);
   const handleQuestionChange = (question: string) => {
     setQuestionItem({ ...questionItem, question });
   };
@@ -21,13 +25,22 @@ const Form = ({ type, questionId }: FormProps) => {
     setQuestionItem({ ...questionItem, answer });
   };
   const clearForm = () => setQuestionItem(intialQuestionState);
-  const handleAddQuestion = () => {
+  const validateForm = () => {
     const trimmedQuestion = questionItem.question.trim();
     if (trimmedQuestion !== "") {
       dispatch(
         addQuestion({ question: trimmedQuestion, answer: questionItem.answer })
       );
-      clearForm();
+    }
+    clearForm();
+  };
+
+  const handleAddQuestion = () => {
+    if (inputRef.current?.checked) {
+      const debouncedUpdate = debounce(validateForm, 5000);
+      debouncedUpdate();
+    } else {
+      validateForm();
     }
   };
   const handleUpdateQuestion = () => {
@@ -70,8 +83,18 @@ const Form = ({ type, questionId }: FormProps) => {
         disabled={false}
         value={questionItem.answer}
       />
-      <Button type="submit" ariaLabel="Create question" color="green">
-        Create question
+      {isAddForm && (
+        <input
+          ref={inputRef}
+          type="checkbox"
+          placeholder=""
+          disabled={false}
+          value={questionItem.answer}
+        />
+      )}
+
+      <Button type="submit" ariaLabel={submitLabel} color="green">
+        {`${submitLabel} question`}
       </Button>
     </form>
   );
