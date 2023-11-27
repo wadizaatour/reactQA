@@ -1,17 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux'
 import Input from '../input/Input'
 import { type FormEvent, useRef, useState, useEffect, Suspense } from 'react'
-import {
-  type FormError,
-  addQuestion,
-  setAddFormErrors
-} from '../../redux/questionsSlice'
+import { addQuestion, setAddFormErrors } from '../../redux/questionsSlice'
 import Button from '../button/Button'
 import { debounce } from '../../utils/debounce'
 import { getAddFormErrors } from '../../redux/selectors'
 import TextArea from '../textArea/TextArea'
 import './Form.css'
 import { lazy } from 'react'
+import { createErrors } from '../../utils/validateForm'
+import { trimQuestion } from '../../utils/trimQuestion'
 
 const Notification = lazy(
   async () => await import('../notification/Notification')
@@ -52,38 +50,29 @@ const Form = () => {
     }
   }, [showNotification])
 
-  const validateForm = () => {
-    const errors: FormError = {}
-    const trimmedQuestion = {
-      question: questionItem.question.trim(),
-      answer: questionItem.answer.trim()
-    }
-
-    if (trimmedQuestion.question === '') {
-      errors.question = 'Question cannot be empty'
-    }
-
-    if (trimmedQuestion.answer === '') {
-      errors.answer = 'Answer cannot be empty'
-    }
-
-    if (Object.keys(errors).length > 0) {
-      dispatch(setAddFormErrors(errors))
-    } else {
-      dispatch(addQuestion(trimmedQuestion))
-      clearForm()
-      setShowNotification(true)
-      setLoading(false)
-    }
+  const addNewQuestion = () => {
+    const trimmedQuestion = trimQuestion({
+      question: questionItem.question,
+      answer: questionItem.answer
+    })
+    dispatch(addQuestion(trimmedQuestion))
+    clearForm()
+    setShowNotification(true)
+    setLoading(false)
   }
 
   const handleAddQuestion = () => {
-    if (inputRef.current?.checked === true && questionItem !== undefined) {
+    const errors = createErrors(questionItem.question, questionItem.answer)
+    if (Object.keys(errors).length > 0) {
+      dispatch(setAddFormErrors(errors))
+      return
+    }
+    if (inputRef.current?.checked === true) {
       setLoading(true)
-      const debouncedUpdate = debounce(validateForm, 5000)
+      const debouncedUpdate = debounce(addNewQuestion, 5000)
       debouncedUpdate()
     } else {
-      validateForm()
+      addNewQuestion()
     }
   }
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
