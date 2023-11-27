@@ -10,6 +10,7 @@ import {
 import Button from '../button/Button'
 import { debounce } from '../../utils/debounce'
 import { getFormErrors } from '../../redux/selectors'
+import TextArea from '../textArea/TextArea'
 interface FormProps {
   type: 'add' | 'update'
   questionId?: number
@@ -102,18 +103,15 @@ const Form = ({ type, questionId }: FormProps) => {
       <Input
         type="text"
         label="Question"
-        placeholder=""
+        placeholder="you can add your question here"
         onChange={handleQuestionChange}
         disabled={false}
         value={questionItem.question}
         error={getFormErrorsValue('question')}
       />
-      <Input
-        type="text"
+      <TextArea
         label="Answer"
-        placeholder=""
         onChange={handleAnswerChange}
-        disabled={false}
         value={questionItem.answer}
         error={getFormErrorsValue('answer')}
       />
