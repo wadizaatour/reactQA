@@ -1,4 +1,4 @@
-interface ButtonProps {
+export interface ButtonProps {
   testId?: string
   className?: string
   ariaLabel: string

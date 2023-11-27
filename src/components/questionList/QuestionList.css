@@ -1,8 +1,8 @@
 .accordion {
   list-style: none;
   padding: 0;
-  height: 378px;
-  overflow: scroll;
+  max-height: 378px;
+  overflow-y: auto;
 }
 
 .accordion li {

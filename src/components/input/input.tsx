@@ -27,7 +27,7 @@ const Input = ({
     const newValue = e.target.value
     onChange(newValue)
   }
-  const handleFocus = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFocus = () => {
     dispatch(setFormErrors({}))
   }
 
