@@ -5,7 +5,7 @@
   position: absolute;
   padding: 16px;
   bottom: 40px;
-  right: 20px;
+  left: 20px;
   color: var(--white);
   animation-name: fadeInOut;
   animation-duration: 6s;
