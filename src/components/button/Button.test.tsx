@@ -36,25 +36,6 @@ describe('button', () => {
     // Check if the onClick function is called
     expect(onClickMock).toHaveBeenCalled()
   })
-  it('calls the onClick function when clicked', () => {
-    render(
-      <Button
-        ariaLabel="Test Button"
-        testId="test-button"
-        color="blue"
-        type="button"
-        onClick={onClickMock}
-      >
-        Click me
-      </Button>
-    )
-
-    const buttonElement = screen.getByTestId('test-button')
-    fireEvent.click(buttonElement)
-
-    // Check if the onClick function is called
-    expect(onClickMock).toHaveBeenCalled()
-  })
 
   it('calls the onClick function when "Enter" key is pressed', () => {
     render(
