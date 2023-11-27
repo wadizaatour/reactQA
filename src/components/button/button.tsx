@@ -6,6 +6,7 @@ export interface ButtonProps {
   ariaLabel: string
   children: string
   color: string
+  loading?: boolean
   type: 'submit' | 'button'
   onClick?: () => void
 }
@@ -13,6 +14,7 @@ export interface ButtonProps {
 const Button = ({
   className,
   ariaLabel,
+  loading,
   children,
   color,
   type,
@@ -38,6 +40,7 @@ const Button = ({
         backgroundColor: color
       }}
     >
+      {loading ? <span className="spinner" /> : null}
       {children}
     </button>
   )

@@ -23,9 +23,11 @@ const Form = ({ type, questionId }: FormProps) => {
   const isAddForm = type === 'add'
   const submitLabel = isAddForm ? 'create question' : 'update'
   const intialQuestionState = { question: '', answer: '' }
+  const [loading, setLoading] = useState(false)
   const [questionItem, setQuestionItem] = useState(intialQuestionState)
   const formErrors = useSelector(getFormErrors)
   const inputRef = useRef<HTMLInputElement>(null)
+
   const handleQuestionChange = (question: string) => {
     setQuestionItem({ ...questionItem, question })
   }
@@ -63,10 +65,12 @@ const Form = ({ type, questionId }: FormProps) => {
       dispatch(addQuestion(trimmedQuestion))
       clearForm()
     }
+    setLoading(false)
   }
 
   const handleAddQuestion = () => {
     if (inputRef.current?.checked === true) {
+      setLoading(true)
       const debouncedUpdate = debounce(validateForm, 5000)
       debouncedUpdate()
     } else {
@@ -132,8 +136,9 @@ const Form = ({ type, questionId }: FormProps) => {
       )}
 
       <Button
+        loading={loading}
         type="submit"
-        className="align-end"
+        className={`align-end ${loading ? 'loading' : ''}`}
         ariaLabel={submitLabel}
         color="green"
       >
