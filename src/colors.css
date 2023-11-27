@@ -1,0 +1,17 @@
+:root {
+  --main-color: rgba(255, 255, 255, 0.87);
+  --bg-color: #242424;
+  --header-footer-bg-color: #007cbd;
+
+  --white: #fff;
+  --light-gray: #f1f1f1;
+  --medium-gray: #888;
+  --nightshade-gray: #555;
+  --dark-gray: #333;
+
+  --blush-red: #f8d7da;
+  --cotton-candy-pink: #f5c6cb;
+  --dark-red: #721c24;
+
+  --shapphire-blue: #646cff;
+}

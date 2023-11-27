@@ -18,9 +18,9 @@
   display: flex;
   flex-direction: column;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--white);
   border-radius: 6px;
-  background-color: #333;
+  background-color: var(--dark-gray);
   margin: 4px;
 }
 
@@ -39,15 +39,15 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--light-gray);
   margin: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--medium-gray);
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--nightshade-gray);
 }
