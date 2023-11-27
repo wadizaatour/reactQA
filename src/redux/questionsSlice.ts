@@ -1,7 +1,8 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { generateRandomId } from '../utils/generateRandomId'
 
 export interface Question {
-  id: string
+  id: number
   question: string
   answer?: string
 }
@@ -45,7 +46,7 @@ const questionsSlice = createSlice({
       action: PayloadAction<{ question: string; answer: string }>
     ) {
       const newQuestion: Question = {
-        id: Date.now().toString(),
+        id: generateRandomId(),
         question: action.payload.question,
         answer: action.payload.answer
       }
@@ -53,7 +54,7 @@ const questionsSlice = createSlice({
       state.list.push(newQuestion)
       localStorage.setItem('questions', JSON.stringify(state.list))
     },
-    deleteQuestion(state, action: PayloadAction<string>) {
+    deleteQuestion(state, action: PayloadAction<number>) {
       const filteredArray = state.list.filter((q) => q.id !== action.payload)
       localStorage.setItem('questions', JSON.stringify(filteredArray))
       state.list = filteredArray
@@ -61,17 +62,6 @@ const questionsSlice = createSlice({
     deleteAll(state) {
       state.list = []
       localStorage.setItem('questions', JSON.stringify([]))
-    },
-    setAnswer(
-      state,
-      action: PayloadAction<{ questionId: string; answerText: string }>
-    ) {
-      const { questionId, answerText } = action.payload
-      const question = state.list.find((q) => q.id === questionId)
-
-      if (question !== undefined) {
-        question.answer = answerText
-      }
     }
   }
 })
@@ -82,7 +72,6 @@ export const {
   addQuestion,
   deleteQuestion,
   deleteAll,
-  setAnswer,
   updateQuestion
 } = questionsSlice.actions
 export default questionsSlice.reducer

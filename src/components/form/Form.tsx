@@ -6,7 +6,7 @@ import Button from '../button/Button'
 import { debounce } from '../../utils/debounce'
 interface FormProps {
   type: 'add' | 'update'
-  questionId?: string
+  questionId?: number
 }
 
 const Form = ({ type, questionId }: FormProps) => {

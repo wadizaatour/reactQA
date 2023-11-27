@@ -11,7 +11,7 @@ interface QuestionItemProps {
 const QuestionItem = ({ item }: QuestionItemProps) => {
   const dispatch = useDispatch()
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
-  const handleRemoveQuestionAndAnswer = (questionId: string) => {
+  const handleRemoveQuestionAndAnswer = (questionId: number) => {
     dispatch(deleteQuestion(questionId))
   }
 
