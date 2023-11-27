@@ -1,4 +1,5 @@
 interface ButtonProps {
+  testId?: string
   ariaLabel: string
   children: string
   color: string
@@ -6,7 +7,14 @@ interface ButtonProps {
   onClick?: () => void
 }
 
-const Button = ({ ariaLabel, children, color, type, onClick }: ButtonProps) => {
+const Button = ({
+  ariaLabel,
+  children,
+  color,
+  type,
+  testId,
+  onClick
+}: ButtonProps) => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       onClick?.()
@@ -15,6 +23,7 @@ const Button = ({ ariaLabel, children, color, type, onClick }: ButtonProps) => {
 
   return (
     <button
+      data-testid={testId}
       type={type}
       role="button"
       aria-label={ariaLabel}
