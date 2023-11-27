@@ -46,7 +46,7 @@ const Input = ({
           onFocus={handleFocus}
         />
       </label>
-      <small>{error}</small>
+      <small className="error">{error}</small>
     </div>
   )
 }

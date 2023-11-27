@@ -1,5 +1,7 @@
 .label-textarea {
-    display: flex;
-    flex-direction: column;
-  }
-  
+  display: flex;
+  flex-direction: column;
+}
+.error {
+  color: #721c24;
+}

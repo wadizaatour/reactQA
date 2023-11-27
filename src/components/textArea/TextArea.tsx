@@ -33,7 +33,7 @@ const TextArea = ({ label, error, onChange, value }: TextAreaProps) => {
           onFocus={handleFocus}
         />
       </label>
-      <small>{error}</small>
+      <small className="error">{error}</small>
     </div>
   )
 }
