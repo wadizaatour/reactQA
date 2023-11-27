@@ -1,4 +1,4 @@
-import { type FormError } from '../redux/questionsSlice'
+import type { FormError } from '../redux/questionsSlice'
 export function createErrors(question: string, answer: string) {
   const errors: FormError = {}
 
