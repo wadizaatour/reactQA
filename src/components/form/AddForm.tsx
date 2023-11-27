@@ -78,7 +78,7 @@ const Form = () => {
   }
 
   const handleAddQuestion = () => {
-    if (inputRef.current?.checked === true) {
+    if (inputRef.current?.checked === true && questionItem !== undefined) {
       setLoading(true)
       const debouncedUpdate = debounce(validateForm, 5000)
       debouncedUpdate()
