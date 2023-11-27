@@ -2,6 +2,7 @@ import { type ChangeEvent } from 'react'
 import { useDispatch } from 'react-redux'
 import { setFormErrors } from '../../redux/questionsSlice'
 import './TextArea.css'
+
 interface TextAreaProps {
   label: string
   error?: string

@@ -17,11 +17,11 @@ function App() {
 
   return (
     <>
-      <header>
+      <header className='header'>
         <h1>The awesome Q/A tool</h1>
       </header>
-      <main>
-        <aside>
+      <main className='main'>
+        <aside className='aside'>
           Here you can find {totalQuestions}. Feel free to create your own
           question
         </aside>
@@ -37,10 +37,10 @@ function App() {
               Create a new question
             </h2>
           </Tooltip>
-          <Form  type="add" />
+          <Form type="add" />
         </section>
       </main>
-      <footer> </footer>
+      <footer>Wadi Zaatour</footer>
     </>
   )
 }

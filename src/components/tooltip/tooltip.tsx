@@ -2,7 +2,7 @@ import { useState, type ReactNode } from 'react'
 import './Tooltip.css'
 
 interface TooltipProps {
-  children: ReactNode // ReactNode is to allow any valid JSX content to be passed as children to the Tooltip
+  children: ReactNode
   text: string
 }
 

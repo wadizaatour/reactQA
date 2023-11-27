@@ -9,6 +9,7 @@ import Button from '../button/Button'
 import QuestionItem from '../questionItem/QuestionItem'
 import './QuestionList.css'
 import Alert from '../alert/Alert'
+
 interface QuestionListProps {
   list: Question[]
 }

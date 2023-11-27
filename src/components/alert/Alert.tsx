@@ -1,4 +1,5 @@
 import './Alert.css'
+
 interface AlertProps {
   message: string
 }
