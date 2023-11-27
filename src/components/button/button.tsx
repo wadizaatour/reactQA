@@ -40,7 +40,7 @@ const Button = ({
         backgroundColor: color
       }}
     >
-      {loading ? <span className="spinner" /> : null}
+      {(loading ?? false) ? <span className="spinner" /> : null}
       {children}
     </button>
   )

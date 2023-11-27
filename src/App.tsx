@@ -4,7 +4,7 @@ import { setAllQuestionList } from './redux/questionsSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import Tooltip from './components/tooltip/Tooltip'
-import Form from './components/form/Form'
+import AddForm from './components/form/AddForm'
 import { getQuestionsList, getTotalQuestions } from './redux/selectors'
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
   const totalQuestions = useSelector(getTotalQuestions)
   useEffect(() => {
     dispatch(setAllQuestionList())
-  }, [dispatch])
+  }, [])
 
   return (
     <>
@@ -37,7 +37,7 @@ function App() {
               Create a new question
             </h2>
           </Tooltip>
-          <Form type="add" />
+          <AddForm />
         </section>
       </main>
       <footer>Wadi Zaatour</footer>

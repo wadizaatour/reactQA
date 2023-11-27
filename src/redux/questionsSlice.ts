@@ -13,11 +13,13 @@ export interface FormError {
 
 interface QuestionsState {
   list: Question[]
-  formErrors: FormError
+  addformErrors: FormError
+  updateFormErros: FormError
 }
 const initialState: QuestionsState = {
   list: [],
-  formErrors: {}
+  addformErrors: {},
+  updateFormErros: {}
 }
 
 const questionsSlice = createSlice({
@@ -34,16 +36,21 @@ const questionsSlice = createSlice({
         a.question.localeCompare(b.question, undefined, { sensitivity: 'base' })
       )
     },
-    setFormErrors(state, action: PayloadAction<FormError>) {
-      state.formErrors = action.payload
+    setAddFormErrors(state, action: PayloadAction<FormError>) {
+      state.addformErrors = action.payload
     },
+
     updateQuestion(state, action: PayloadAction<Question>) {
       state.list = state.list.map((item) => {
         if (item.id === action.payload.id) {
           return {
             ...item,
-            question: action.payload.question,
-            answer: action.payload.answer
+            question:
+              action.payload.question !== ''
+                ? action.payload.question
+                : item.question,
+            answer:
+              action.payload.answer !== '' ? action.payload.answer : item.answer
           }
         }
         return item
@@ -78,7 +85,7 @@ const questionsSlice = createSlice({
 export const {
   setAllQuestionList,
   sortQuestionList,
-  setFormErrors,
+  setAddFormErrors,
   addQuestion,
   deleteQuestion,
   deleteAll,

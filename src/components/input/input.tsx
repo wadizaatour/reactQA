@@ -1,6 +1,8 @@
 import { type ChangeEvent } from 'react'
 import { useDispatch } from 'react-redux'
-import { setFormErrors } from '../../redux/questionsSlice'
+import {
+  setAddFormErrors
+} from '../../redux/questionsSlice'
 import './Input.css'
 
 interface InputProps {
@@ -29,7 +31,8 @@ const Input = ({
     onChange(newValue)
   }
   const handleFocus = () => {
-    dispatch(setFormErrors({}))
+    dispatch(setAddFormErrors({}))
+  
   }
 
   return (

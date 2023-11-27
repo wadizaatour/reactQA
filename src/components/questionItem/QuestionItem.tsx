@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import { useDispatch } from 'react-redux'
 import { type Question, deleteQuestion } from '../../redux/questionsSlice'
-import Form from '../../components/form/Form'
 import Button from '../button/Button'
 
+const UpdateForm = lazy(async () => await import('../form/UpdateForm'))
 interface QuestionItemProps {
   item: Question
 }
@@ -53,7 +53,11 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
         </div>
       </div>
 
-      {isExpanded && <Form type="update" questionId={item.id} />}
+      {isExpanded && (
+        <Suspense>
+          <UpdateForm questionId={item.id} />
+        </Suspense>
+      )}
     </>
   )
 }

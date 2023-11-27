@@ -4,31 +4,25 @@ import { type FormEvent, useRef, useState, useEffect, Suspense } from 'react'
 import {
   type FormError,
   addQuestion,
-  setFormErrors,
-  updateQuestion
+  setAddFormErrors
 } from '../../redux/questionsSlice'
 import Button from '../button/Button'
 import { debounce } from '../../utils/debounce'
-import { getFormErrors } from '../../redux/selectors'
+import { getAddFormErrors } from '../../redux/selectors'
 import TextArea from '../textArea/TextArea'
 import './Form.css'
 import { lazy } from 'react'
 
-const Notification = lazy(() => import('../notification/Notification'))
-interface FormProps {
-  type: 'add' | 'update'
-  questionId?: number
-}
-
-const Form = ({ type, questionId }: FormProps) => {
+const Notification = lazy(
+  async () => await import('../notification/Notification')
+)
+const Form = () => {
   const dispatch = useDispatch()
-  const isAddForm = type === 'add'
-  const submitLabel = isAddForm ? 'create question' : 'update'
   const intialQuestionState = { question: '', answer: '' }
   const [loading, setLoading] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [questionItem, setQuestionItem] = useState(intialQuestionState)
-  const formErrors = useSelector(getFormErrors)
+  const formErrors = useSelector(getAddFormErrors)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleQuestionChange = (question: string) => {
@@ -52,17 +46,18 @@ const Form = ({ type, questionId }: FormProps) => {
         setShowNotification(false)
       }, 3000)
 
-      return () => clearTimeout(timer)
+      return () => {
+        clearTimeout(timer)
+      }
     }
   }, [showNotification])
 
   const validateForm = () => {
+    const errors: FormError = {}
     const trimmedQuestion = {
       question: questionItem.question.trim(),
       answer: questionItem.answer.trim()
     }
-
-    const errors: FormError = {}
 
     if (trimmedQuestion.question === '') {
       errors.question = 'Question cannot be empty'
@@ -73,7 +68,7 @@ const Form = ({ type, questionId }: FormProps) => {
     }
 
     if (Object.keys(errors).length > 0) {
-      dispatch(setFormErrors(errors))
+      dispatch(setAddFormErrors(errors))
     } else {
       dispatch(addQuestion(trimmedQuestion))
       clearForm()
@@ -91,27 +86,9 @@ const Form = ({ type, questionId }: FormProps) => {
       validateForm()
     }
   }
-  const handleUpdateQuestion = () => {
-    if (questionId !== undefined) {
-      dispatch(
-        updateQuestion({
-          id: questionId,
-          question: questionItem.question,
-          answer: questionItem.answer
-        })
-      )
-      clearForm()
-      setShowNotification(true)
-    }
-  }
-
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (type === 'add') {
-      handleAddQuestion()
-    } else {
-      handleUpdateQuestion()
-    }
+    handleAddQuestion()
   }
   const getFormErrorsValue = (type: string) => {
     if (formErrors !== undefined) {
@@ -137,34 +114,31 @@ const Form = ({ type, questionId }: FormProps) => {
           value={questionItem.answer}
           error={getFormErrorsValue('answer')}
         />
-        {isAddForm && (
-          <label className="align-end">
-            Tick here for delay
-            <input
-              aria-label="debounce add question"
-              name="checkbox"
-              ref={inputRef}
-              type="checkbox"
-              disabled={false}
-              value={questionItem.answer}
-            />
-          </label>
-        )}
+        <label className="align-end">
+          Tick here for delay
+          <input
+            aria-label="debounce add question"
+            name="checkbox"
+            ref={inputRef}
+            type="checkbox"
+            disabled={false}
+            value={questionItem.answer}
+          />
+        </label>
+
         <Button
           loading={loading}
           type="submit"
-          className={`align-end ${loading ? 'loading' : ''}`}
-          ariaLabel={submitLabel}
+          className="align-end"
+          ariaLabel=" create question"
           color="green"
         >
-          {submitLabel}
+          create question
         </Button>
       </form>
       {showNotification && (
         <Suspense>
-          <Notification
-            message={`Question ${isAddForm ? 'added' : 'updated'}`}
-          />
+          <Notification message="Question added" />
         </Suspense>
       )}
     </div>

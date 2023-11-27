@@ -1,6 +1,8 @@
 import { type ChangeEvent } from 'react'
 import { useDispatch } from 'react-redux'
-import { setFormErrors } from '../../redux/questionsSlice'
+import {
+  setAddFormErrors
+} from '../../redux/questionsSlice'
 import './TextArea.css'
 
 interface TextAreaProps {
@@ -18,7 +20,8 @@ const TextArea = ({ label, error, onChange, value }: TextAreaProps) => {
     onChange(newValue)
   }
   const handleFocus = () => {
-    dispatch(setFormErrors({}))
+    dispatch(setAddFormErrors({}))
+  
   }
 
   return (
