@@ -1,9 +1,15 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Input from '../input/Input'
 import { type FormEvent, useRef, useState } from 'react'
-import { addQuestion, updateQuestion } from '../../redux/questionsSlice'
+import {
+  type FormError,
+  addQuestion,
+  setFormErrors,
+  updateQuestion
+} from '../../redux/questionsSlice'
 import Button from '../button/Button'
 import { debounce } from '../../utils/debounce'
+import { getFormErrors } from '../../redux/selectors'
 interface FormProps {
   type: 'add' | 'update'
   questionId?: number
@@ -15,7 +21,7 @@ const Form = ({ type, questionId }: FormProps) => {
   const submitLabel = isAddForm ? 'create question' : 'update question'
   const intialQuestionState = { question: '', answer: '' }
   const [questionItem, setQuestionItem] = useState(intialQuestionState)
-
+  const formErrors = useSelector(getFormErrors)
   const inputRef = useRef<HTMLInputElement>(null)
   const handleQuestionChange = (question: string) => {
     setQuestionItem({ ...questionItem, question })
@@ -33,16 +39,27 @@ const Form = ({ type, questionId }: FormProps) => {
   }
 
   const validateForm = () => {
-    const trimmedQuestion = questionItem.question.trim()
-    if (trimmedQuestion !== '') {
-      dispatch(
-        addQuestion({
-          question: trimmedQuestion,
-          answer: questionItem.answer
-        })
-      )
+    const trimmedQuestion = {
+      question: questionItem.question.trim(),
+      answer: questionItem.answer.trim()
     }
-    clearForm()
+
+    const errors: FormError = {}
+
+    if (trimmedQuestion.question === '') {
+      errors.question = 'Question cannot be empty'
+    }
+
+    if (trimmedQuestion.answer === '') {
+      errors.answer = 'Answer cannot be empty'
+    }
+
+    if (Object.keys(errors).length > 0) {
+      dispatch(setFormErrors(errors))
+    } else {
+      dispatch(addQuestion(trimmedQuestion))
+      clearForm()
+    }
   }
 
   const handleAddQuestion = () => {
@@ -74,6 +91,11 @@ const Form = ({ type, questionId }: FormProps) => {
       handleUpdateQuestion()
     }
   }
+  const getFormErrorsValue = (type: string) => {
+    if (formErrors !== undefined) {
+      return type === 'question' ? formErrors.question : formErrors.answer
+    }
+  }
 
   return (
     <form onSubmit={submitHandler}>
@@ -84,6 +106,7 @@ const Form = ({ type, questionId }: FormProps) => {
         onChange={handleQuestionChange}
         disabled={false}
         value={questionItem.question}
+        error={getFormErrorsValue('question')}
       />
       <Input
         type="text"
@@ -92,6 +115,7 @@ const Form = ({ type, questionId }: FormProps) => {
         onChange={handleAnswerChange}
         disabled={false}
         value={questionItem.answer}
+        error={getFormErrorsValue('answer')}
       />
       {isAddForm && (
         <label>

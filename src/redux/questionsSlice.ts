@@ -6,12 +6,18 @@ export interface Question {
   question: string
   answer?: string
 }
+export interface FormError {
+  question?: string
+  answer?: string
+}
 
 interface QuestionsState {
   list: Question[]
+  formErrors: FormError
 }
 const initialState: QuestionsState = {
-  list: []
+  list: [],
+  formErrors: {}
 }
 
 const questionsSlice = createSlice({
@@ -27,6 +33,9 @@ const questionsSlice = createSlice({
       state.list.sort((a, b) =>
         a.question.localeCompare(b.question, undefined, { sensitivity: 'base' })
       )
+    },
+    setFormErrors(state, action: PayloadAction<FormError>) {
+      state.formErrors = action.payload
     },
     updateQuestion(state, action: PayloadAction<Question>) {
       state.list = state.list.map((item) => {
@@ -69,6 +78,7 @@ const questionsSlice = createSlice({
 export const {
   setAllQuestionList,
   sortQuestionList,
+  setFormErrors,
   addQuestion,
   deleteQuestion,
   deleteAll,
