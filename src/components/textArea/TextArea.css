@@ -1,8 +1,9 @@
 .label-textarea {
   display: flex;
   flex-direction: column;
+  gap: 4px;
 }
 
 .error {
-  color: var(--dark-gray);
+  color: var(--dark-red);
 }

@@ -1,6 +1,6 @@
-.update-form {
+.form {
   display: flex;
-  gap: 2px;
+  gap: 6px;
 }
 
 .align-end {

@@ -33,7 +33,7 @@ const Input = ({
   }
 
   return (
-    <div className="input-wrapper">
+    <>
       <label className="label-input" htmlFor={label}>
         {label}
         <input
@@ -48,7 +48,7 @@ const Input = ({
         />
       </label>
       <small className="error">{error}</small>
-    </div>
+    </>
   )
 }
 

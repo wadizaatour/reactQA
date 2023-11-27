@@ -101,7 +101,7 @@ const Form = ({ type, questionId }: FormProps) => {
   }
 
   return (
-    <form className="update-form" onSubmit={submitHandler}>
+    <form className="form" onSubmit={submitHandler}>
       <Input
         type="text"
         label="Question"
