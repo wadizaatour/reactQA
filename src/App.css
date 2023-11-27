@@ -6,6 +6,8 @@
 }
 
 .main {
+  min-width: 1200px;
+  margin: 0 auto;
   display: grid;
   padding: 20px;
   grid-template-columns: 25% 50%;
@@ -49,6 +51,7 @@ footer {
 
 @media only screen and (max-width: 600px) {
   .main {
+    min-width: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
