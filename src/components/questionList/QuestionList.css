@@ -1,0 +1,57 @@
+.accordion {
+  list-style: none;
+  padding: 0;
+  height: 378px;
+  overflow: scroll;
+}
+
+.accordion li {
+  margin-bottom: 5px;
+}
+
+.accordion a {
+  display: block;
+  padding: 10px;
+  background-color: #f4f4f4;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.accordion a:hover {
+  background-color: #ddd;
+}
+.button-group {
+  padding: 2px;
+  margin: 2px;
+  display: flex;
+  gap: 4px;
+}
+/* Hide the content by default */
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+}
+
+/* Show the content when the corresponding anchor is targeted */
+:target .content {
+  display: block;
+}
+.question-container {
+  display: flex;
+  justify-content: space-between;
+}
+.information {
+  display: flex;
+  flex-direction: column;
+}
+.button-group {
+  display: flex;
+
+  justify-content: center;
+}

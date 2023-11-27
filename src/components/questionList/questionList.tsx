@@ -7,7 +7,7 @@ import {
 import { useDispatch } from 'react-redux'
 import Button from '../button/Button'
 import QuestionItem from '../questionItem/QuestionItem'
-
+import './QuestionList.css'
 interface QuestionListProps {
   list: Question[]
 }
@@ -26,14 +26,14 @@ const QuestionList = ({ list }: QuestionListProps) => {
   return (
     <section>
       <h3>Questions:</h3>
-      <ul>
+      <ul className="accordion">
         {list?.map((questionItem: Question) => (
-          <li key={questionItem.id}>
+          <li className="content" key={questionItem.id}>
             <QuestionItem item={questionItem} />
           </li>
         ))}
       </ul>
-      <div>
+      <div className='button-group'>
         <Button
           type="button"
           ariaLabel="Sort questions"

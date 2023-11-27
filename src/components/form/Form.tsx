@@ -11,6 +11,7 @@ import Button from '../button/Button'
 import { debounce } from '../../utils/debounce'
 import { getFormErrors } from '../../redux/selectors'
 import TextArea from '../textArea/TextArea'
+import './Form.css'
 interface FormProps {
   type: 'add' | 'update'
   questionId?: number
@@ -19,7 +20,7 @@ interface FormProps {
 const Form = ({ type, questionId }: FormProps) => {
   const dispatch = useDispatch()
   const isAddForm = type === 'add'
-  const submitLabel = isAddForm ? 'create question' : 'update question'
+  const submitLabel = isAddForm ? 'create question' : 'update'
   const intialQuestionState = { question: '', answer: '' }
   const [questionItem, setQuestionItem] = useState(intialQuestionState)
   const formErrors = useSelector(getFormErrors)
@@ -99,7 +100,7 @@ const Form = ({ type, questionId }: FormProps) => {
   }
 
   return (
-    <form onSubmit={submitHandler}>
+    <form className="update-form" onSubmit={submitHandler}>
       <Input
         type="text"
         label="Question"
@@ -116,7 +117,8 @@ const Form = ({ type, questionId }: FormProps) => {
         error={getFormErrorsValue('answer')}
       />
       {isAddForm && (
-        <label>
+        <label className="align-end">
+          Tick here for delay
           <input
             aria-label="debounce add question"
             name="checkbox"
@@ -128,7 +130,12 @@ const Form = ({ type, questionId }: FormProps) => {
         </label>
       )}
 
-      <Button type="submit" ariaLabel={submitLabel} color="green">
+      <Button
+        type="submit"
+        className="align-end"
+        ariaLabel={submitLabel}
+        color="green"
+      >
         {submitLabel}
       </Button>
     </form>

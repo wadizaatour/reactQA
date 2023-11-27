@@ -1,5 +1,6 @@
 interface ButtonProps {
   testId?: string
+  className?: string
   ariaLabel: string
   children: string
   color: string
@@ -8,6 +9,7 @@ interface ButtonProps {
 }
 
 const Button = ({
+  className,
   ariaLabel,
   children,
   color,
@@ -23,6 +25,7 @@ const Button = ({
 
   return (
     <button
+      className={className}
       data-testid={testId}
       type={type}
       role="button"

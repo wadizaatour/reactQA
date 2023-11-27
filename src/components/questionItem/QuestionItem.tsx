@@ -23,29 +23,37 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
 
   return (
     <>
-      <span>{item.question}</span>
-      {isExpanded && <p>Answer: {item.answer}</p>}
-      <Button
-        ariaLabel={expandLabel}
-        color="#757575"
-        type="button"
-        onClick={() => {
-          toggleQuestionExpansion()
-        }}
-      >
-        {expandLabel}
-      </Button>
+      <div className="question-container">
+        <div className="information">
+          <span>{item.question}</span>
+          {isExpanded && <p>Answer: {item.answer}</p>}
+        </div>
+        <div className="button-group">
+          <Button
+            ariaLabel={expandLabel}
+            color="#757575"
+            type="button"
+            onClick={() => {
+              toggleQuestionExpansion()
+            }}
+          >
+            {expandLabel}
+          </Button>
+
+          <Button
+            ariaLabel="Remove"
+            color="#757575"
+            type="button"
+            onClick={() => {
+              handleRemoveQuestionAndAnswer(item.id)
+            }}
+          >
+            Remove
+          </Button>
+        </div>
+      </div>
+
       {isExpanded && <Form type="update" questionId={item.id} />}
-      <Button
-        ariaLabel="Remove"
-        color="#757575"
-        type="button"
-        onClick={() => {
-          handleRemoveQuestionAndAnswer(item.id)
-        }}
-      >
-        Remove
-      </Button>
     </>
   )
 }

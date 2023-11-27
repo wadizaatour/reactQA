@@ -1,6 +1,7 @@
 import { type ChangeEvent } from 'react'
 import { useDispatch } from 'react-redux'
 import { setFormErrors } from '../../redux/questionsSlice'
+import './Input.css'
 interface InputProps {
   type: 'text' | 'password' | 'email' // specify allowed input types
   label: string
@@ -32,7 +33,7 @@ const Input = ({
 
   return (
     <div className="input-wrapper">
-      <label htmlFor={label}>
+      <label className="label-input" htmlFor={label}>
         {label}
         <input
           aria-labelledby={lowercaseLabel}

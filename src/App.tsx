@@ -25,19 +25,19 @@ function App() {
           Here you can find {totalQuestions}. Feel free to create your own
           question
         </aside>
-        <section>
+        <section className="section-list">
           <Tooltip text="This is a tooltip">
             <h2 aria-describedby="created-question"> Created Question</h2>
           </Tooltip>
           <QuestionList list={questionsState} />
         </section>
-        <section>
+        <section className="section-form">
           <Tooltip text="This is a tooltip">
             <h2 aria-describedby="create-new-question">
               Create a new question
             </h2>
           </Tooltip>
-          <Form type="add" />
+          <Form  type="add" />
         </section>
       </main>
       <footer> </footer>

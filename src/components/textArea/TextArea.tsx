@@ -1,6 +1,7 @@
 import { type ChangeEvent } from 'react'
 import { useDispatch } from 'react-redux'
 import { setFormErrors } from '../../redux/questionsSlice'
+import './TextArea.css'
 interface TextAreaProps {
   label: string
   error?: string
@@ -21,7 +22,7 @@ const TextArea = ({ label, error, onChange, value }: TextAreaProps) => {
 
   return (
     <div>
-      <label htmlFor={label}>
+      <label className="label-textarea" htmlFor={label}>
         {label}
         <textarea
           aria-labelledby={lowercaseLabel}
