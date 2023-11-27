@@ -33,7 +33,6 @@ aside {
 /* Section (right column) styles */
 section {
   flex-basis: 75%;
-  padding: 10px;
 }
 .section-list {
   grid-area: list;

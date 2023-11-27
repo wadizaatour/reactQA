@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import Button from '../button/Button'
 import QuestionItem from '../questionItem/QuestionItem'
 import './QuestionList.css'
+import Alert from '../alert/Alert'
 interface QuestionListProps {
   list: Question[]
 }
@@ -25,7 +26,6 @@ const QuestionList = ({ list }: QuestionListProps) => {
 
   return (
     <section>
-      <h3>Questions:</h3>
       <ul className="accordion">
         {list?.map((questionItem: Question) => (
           <li className="content" key={questionItem.id}>
@@ -33,24 +33,28 @@ const QuestionList = ({ list }: QuestionListProps) => {
           </li>
         ))}
       </ul>
-      <div className='button-group'>
-        <Button
-          type="button"
-          ariaLabel="Sort questions"
-          color="#285283"
-          onClick={handleSort}
-        >
-          Sort questions
-        </Button>
-        <Button
-          type="button"
-          ariaLabel="Remove questions"
-          color="#E20F0F"
-          onClick={handleDeleteAllQuestions}
-        >
-          Remove questions
-        </Button>
-      </div>
+      {list.length === 0 ? (
+        <Alert message="No questions yet" />
+      ) : (
+        <div className="button-group">
+          <Button
+            type="button"
+            ariaLabel="Sort questions"
+            color="#285283"
+            onClick={handleSort}
+          >
+            Sort questions
+          </Button>
+          <Button
+            type="button"
+            ariaLabel="Remove questions"
+            color="#E20F0F"
+            onClick={handleDeleteAllQuestions}
+          >
+            Remove questions
+          </Button>
+        </div>
+      )}
     </section>
   )
 }

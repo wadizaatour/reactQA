@@ -34,8 +34,9 @@
   flex-direction: column;
   padding: 10px;
   border: 1px solid #ccc;
-  border-top: none;
-  border-radius: 0 0 5px 5px;
+  border-radius: 5px;
+  background-color: #333;
+  margin: 4px;
 }
 
 /* Show the content when the corresponding anchor is targeted */
@@ -54,4 +55,25 @@
   display: flex;
 
   justify-content: center;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  margin: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

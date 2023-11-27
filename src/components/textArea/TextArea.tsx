@@ -25,6 +25,7 @@ const TextArea = ({ label, error, onChange, value }: TextAreaProps) => {
       <label className="label-textarea" htmlFor={label}>
         {label}
         <textarea
+          placeholder="Add your answer here"
           aria-labelledby={lowercaseLabel}
           id={lowercaseLabel}
           value={value}
