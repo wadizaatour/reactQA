@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import Input from '../input/Input'
-import { type FormEvent, useRef, useState, useEffect } from 'react'
+import { type FormEvent, useRef, useState, useEffect, Suspense } from 'react'
 import {
   type FormError,
   addQuestion,
@@ -12,8 +12,9 @@ import { debounce } from '../../utils/debounce'
 import { getFormErrors } from '../../redux/selectors'
 import TextArea from '../textArea/TextArea'
 import './Form.css'
-import Notification from '../notification/Notification'
+import { lazy } from 'react'
 
+const Notification = lazy(() => import('../notification/Notification'))
 interface FormProps {
   type: 'add' | 'update'
   questionId?: number
@@ -160,7 +161,11 @@ const Form = ({ type, questionId }: FormProps) => {
         </Button>
       </form>
       {showNotification && (
-        <Notification message={`Question ${isAddForm ? 'added' : 'updated'}`} />
+        <Suspense>
+          <Notification
+            message={`Question ${isAddForm ? 'added' : 'updated'}`}
+          />
+        </Suspense>
       )}
     </div>
   )
