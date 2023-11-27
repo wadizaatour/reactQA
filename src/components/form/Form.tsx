@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import Input from '../input/Input'
-import { type FormEvent, useRef, useState } from 'react'
+import { type FormEvent, useRef, useState, useEffect } from 'react'
 import {
   type FormError,
   addQuestion,
@@ -12,6 +12,7 @@ import { debounce } from '../../utils/debounce'
 import { getFormErrors } from '../../redux/selectors'
 import TextArea from '../textArea/TextArea'
 import './Form.css'
+import Notification from '../notification/Notification'
 
 interface FormProps {
   type: 'add' | 'update'
@@ -24,6 +25,7 @@ const Form = ({ type, questionId }: FormProps) => {
   const submitLabel = isAddForm ? 'create question' : 'update'
   const intialQuestionState = { question: '', answer: '' }
   const [loading, setLoading] = useState(false)
+  const [showNotification, setShowNotification] = useState(false)
   const [questionItem, setQuestionItem] = useState(intialQuestionState)
   const formErrors = useSelector(getFormErrors)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -42,6 +44,16 @@ const Form = ({ type, questionId }: FormProps) => {
 
     setQuestionItem(intialQuestionState)
   }
+
+  useEffect(() => {
+    if (showNotification) {
+      const timer = setTimeout(() => {
+        setShowNotification(false)
+      }, 3000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [showNotification])
 
   const validateForm = () => {
     const trimmedQuestion = {
@@ -64,8 +76,9 @@ const Form = ({ type, questionId }: FormProps) => {
     } else {
       dispatch(addQuestion(trimmedQuestion))
       clearForm()
+      setShowNotification(true)
+      setLoading(false)
     }
-    setLoading(false)
   }
 
   const handleAddQuestion = () => {
@@ -87,6 +100,7 @@ const Form = ({ type, questionId }: FormProps) => {
         })
       )
       clearForm()
+      setShowNotification(true)
     }
   }
 
@@ -105,46 +119,50 @@ const Form = ({ type, questionId }: FormProps) => {
   }
 
   return (
-    <form className="form" onSubmit={submitHandler}>
-      <Input
-        type="text"
-        label="Question"
-        placeholder="you can add your question here"
-        onChange={handleQuestionChange}
-        disabled={false}
-        value={questionItem.question}
-        error={getFormErrorsValue('question')}
-      />
-      <TextArea
-        label="Answer"
-        onChange={handleAnswerChange}
-        value={questionItem.answer}
-        error={getFormErrorsValue('answer')}
-      />
-      {isAddForm && (
-        <label className="align-end">
-          Tick here for delay
-          <input
-            aria-label="debounce add question"
-            name="checkbox"
-            ref={inputRef}
-            type="checkbox"
-            disabled={false}
-            value={questionItem.answer}
-          />
-        </label>
+    <div>
+      <form className="form" onSubmit={submitHandler}>
+        <Input
+          type="text"
+          label="Question"
+          placeholder="you can add your question here"
+          onChange={handleQuestionChange}
+          disabled={false}
+          value={questionItem.question}
+          error={getFormErrorsValue('question')}
+        />
+        <TextArea
+          label="Answer"
+          onChange={handleAnswerChange}
+          value={questionItem.answer}
+          error={getFormErrorsValue('answer')}
+        />
+        {isAddForm && (
+          <label className="align-end">
+            Tick here for delay
+            <input
+              aria-label="debounce add question"
+              name="checkbox"
+              ref={inputRef}
+              type="checkbox"
+              disabled={false}
+              value={questionItem.answer}
+            />
+          </label>
+        )}
+        <Button
+          loading={loading}
+          type="submit"
+          className={`align-end ${loading ? 'loading' : ''}`}
+          ariaLabel={submitLabel}
+          color="green"
+        >
+          {submitLabel}
+        </Button>
+      </form>
+      {showNotification && (
+        <Notification message={`Question ${isAddForm ? 'added' : 'updated'}`} />
       )}
-
-      <Button
-        loading={loading}
-        type="submit"
-        className={`align-end ${loading ? 'loading' : ''}`}
-        ariaLabel={submitLabel}
-        color="green"
-      >
-        {submitLabel}
-      </Button>
-    </form>
+    </div>
   )
 }
 
