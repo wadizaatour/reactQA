@@ -63,22 +63,26 @@ const Form = () => {
 
   const handleAddQuestion = () => {
     const errors = createErrors(questionItem.question, questionItem.answer)
-    if (Object.keys(errors).length > 0) {
+    const isError = Object.keys(errors).length > 0
+
+    if (isError) {
       dispatch(setAddFormErrors(errors))
-      return
     }
-    if (inputRef.current?.checked === true) {
+
+    if (inputRef.current?.checked === true && !isError) {
       setLoading(true)
       const debouncedUpdate = debounce(addNewQuestion, 5000)
       debouncedUpdate()
-    } else {
-      addNewQuestion()
     }
+
+    if (inputRef.current?.checked === false && !isError) addNewQuestion()
   }
+
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     handleAddQuestion()
   }
+
   const getFormErrorsValue = (type: string) => {
     if (formErrors !== undefined) {
       return type === 'question' ? formErrors.question : formErrors.answer
