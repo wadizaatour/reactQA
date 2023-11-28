@@ -10,7 +10,7 @@ button {
 }
 
 button:hover {
-  border-color: var(--shapphire-blue);
+  border-color: var(--white);
 }
 
 button:focus,
