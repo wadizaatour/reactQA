@@ -7,8 +7,8 @@ export interface Question {
   answer?: string
 }
 export interface FormError {
-  question?: string
-  answer?: string
+  questionError?: string
+  answerError?: string
 }
 
 interface QuestionsState {

@@ -59,12 +59,7 @@ const UpdateForm = ({ questionId }: UpdateFormProps) => {
           onChange={handleAnswerChange}
           value={questionItem.answer}
         />
-        <Button
-          type="submit"
-          className="align-end"
-          ariaLabel="update"
-          color="green"
-        >
+        <Button type="submit" className="align-end" ariaLabel="update">
           update
         </Button>
       </form>

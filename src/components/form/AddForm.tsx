@@ -85,7 +85,9 @@ const Form = () => {
 
   const getFormErrorsValue = (type: string) => {
     if (formErrors !== undefined) {
-      return type === 'question' ? formErrors.question : formErrors.answer
+      return type === 'question'
+        ? formErrors.questionError
+        : formErrors.answerError
     }
   }
 
@@ -122,9 +124,8 @@ const Form = () => {
         <Button
           loading={loading}
           type="submit"
-          className="align-end"
+          className="align-end green"
           ariaLabel=" create question"
-          color="green"
         >
           create question
         </Button>

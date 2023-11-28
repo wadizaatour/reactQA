@@ -10,7 +10,7 @@ type Story = StoryObj<typeof Button>
 
 export const Primary: Story = {
   render: () => (
-    <Button ariaLabel="Default Button" color="red" type="button">
+    <Button ariaLabel="Default Button" type="button">
       Test
     </Button>
   )

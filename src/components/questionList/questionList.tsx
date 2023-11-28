@@ -41,7 +41,7 @@ const QuestionList = ({ list }: QuestionListProps) => {
           <Button
             type="button"
             ariaLabel="Sort questions"
-            color="#285283"
+            className="blue"
             onClick={handleSort}
           >
             Sort questions
@@ -49,7 +49,7 @@ const QuestionList = ({ list }: QuestionListProps) => {
           <Button
             type="button"
             ariaLabel="Remove questions"
-            color="#E20F0F"
+            className="red"
             onClick={handleDeleteAllQuestions}
           >
             Remove questions

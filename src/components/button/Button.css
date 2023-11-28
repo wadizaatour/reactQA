@@ -40,3 +40,15 @@ button:focus-visible {
     transform: rotate(360deg);
   }
 }
+.red {
+  background-color: var(--red);
+}
+.green {
+  background-color: var(--green);
+}
+.blue {
+  background-color: var(--blue);
+}
+.gray {
+  background-color: var(--gray);
+}

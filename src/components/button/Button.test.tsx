@@ -6,12 +6,7 @@ describe('button', () => {
 
   it('button is able to render when page is loaded', () => {
     render(
-      <Button
-        ariaLabel="CreateQuestion"
-        testId="button1"
-        color={'red'}
-        type={'button'}
-      >
+      <Button ariaLabel="CreateQuestion" testId="button1" type={'button'}>
         button test
       </Button>
     )
@@ -22,7 +17,6 @@ describe('button', () => {
       <Button
         ariaLabel="Test Button"
         testId="test-button"
-        color="blue"
         type="button"
         onClick={onClickMock}
       >
@@ -42,7 +36,6 @@ describe('button', () => {
       <Button
         ariaLabel="Test Button"
         testId="test-button"
-        color="blue"
         type="button"
         onClick={onClickMock}
       >
@@ -62,7 +55,6 @@ describe('button', () => {
       <Button
         ariaLabel="Test Button"
         testId="test-button"
-        color="blue"
         type="button"
         onClick={onClickMock}
       >

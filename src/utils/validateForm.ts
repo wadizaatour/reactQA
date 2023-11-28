@@ -3,11 +3,11 @@ export function createErrors(question: string, answer: string) {
   const errors: FormError = {}
 
   if (question.trim() === '') {
-    errors.question = 'Question cannot be empty'
+    errors.questionError = 'Question cannot be empty'
   }
 
   if (answer.trim() === '') {
-    errors.answer = 'Answer cannot be empty'
+    errors.answerError = 'Answer cannot be empty'
   }
   return errors
 }

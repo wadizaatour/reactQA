@@ -5,7 +5,6 @@ export interface ButtonProps {
   className?: string
   ariaLabel: string
   children: string
-  color: string
   loading?: boolean
   type: 'submit' | 'button'
   onClick?: () => void
@@ -16,7 +15,6 @@ const Button = ({
   ariaLabel,
   loading,
   children,
-  color,
   type,
   testId,
   onClick
@@ -36,9 +34,6 @@ const Button = ({
       aria-label={ariaLabel}
       onClick={onClick}
       onKeyDown={handleKeyDown}
-      style={{
-        backgroundColor: color
-      }}
     >
       {loading === true ? <span className="spinner" /> : null}
       {children}

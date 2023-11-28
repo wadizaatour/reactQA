@@ -31,7 +31,6 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
         <div className="button-group">
           <Button
             ariaLabel={expandLabel}
-            color="#757575"
             type="button"
             onClick={() => {
               toggleQuestionExpansion()
@@ -42,7 +41,7 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
 
           <Button
             ariaLabel="Remove"
-            color="#757575"
+            className="gray"
             type="button"
             onClick={() => {
               handleRemoveQuestionAndAnswer(item.id)

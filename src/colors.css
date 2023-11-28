@@ -1,6 +1,6 @@
 :root {
   --main-color: rgba(255, 255, 255, 0.87);
-  --bg-color: #242424;
+  --bg-color: #252525;
   --header-footer-bg-color: #007cbd;
 
   --white: #fff;
@@ -8,7 +8,10 @@
   --medium-gray: #888;
   --nightshade-gray: #555;
   --dark-gray: #333;
-
+  --green: #236f37;
+  --blue: blue;
+  --red: #ac2a2a;
+  --gray: #485158;
   --blush-red: #f8d7da;
   --cotton-candy-pink: #f5c6cb;
   --dark-red: #721c24;
