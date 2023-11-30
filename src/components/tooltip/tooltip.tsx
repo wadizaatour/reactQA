@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import styles from './Tooltip.module.css'
 
-interface TooltipProps {
+export interface TooltipProps {
   children: ReactNode
   text: string
 }

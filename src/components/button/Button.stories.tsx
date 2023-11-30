@@ -1,17 +1,15 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import Button from './Button'
-
-const meta: Meta<typeof Button> = {
+import Button, { type ButtonProps } from './Button'
+import styles from './Button.module.css'
+export default {
+  title: 'Button',
   component: Button
 }
 
-export default meta
-type Story = StoryObj<typeof Button>
+const Template = (args: ButtonProps) => <Button {...args}>Button</Button>
 
-export const Primary: Story = {
-  render: () => (
-    <Button color="green" ariaLabel="Default Button" type="button">
-      Test
-    </Button>
-  )
-}
+export const Default = (args: ButtonProps) => <Template {...args} />
+
+// Story using CSS Modules
+export const WithCSSModules = (args: ButtonProps) => (
+  <Template {...args} className={styles.Button} />
+)

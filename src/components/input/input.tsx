@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux'
 import { setAddFormErrors } from '../../redux/questionsSlice'
 import styles from './Input.module.css'
 
-interface InputProps {
-  type: 'text' | 'password' | 'email' // specify allowed input types
+export interface InputProps {
+  type: 'text'
   label: string
   error?: string
   value: string

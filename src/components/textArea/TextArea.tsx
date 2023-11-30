@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { setAddFormErrors } from '../../redux/questionsSlice'
 import styles from './TextArea.module.css'
 
-interface TextAreaProps {
+export interface TextAreaProps {
   label: string
   error?: string
   value: string

@@ -1,6 +1,6 @@
 import styles from './Notification.module.css'
 
-interface NotificationProps {
+export interface NotificationProps {
   message: string
 }
 
