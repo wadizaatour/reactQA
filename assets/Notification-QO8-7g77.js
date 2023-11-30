@@ -1,1 +1,0 @@
-import{j as i}from"./index-0GCkx6g4.js";const t=({message:e})=>i.jsxDEV("span",{className:"notification",children:e},void 0,!1,{fileName:"C:/Users/wadi/Documents/repos/reactQA/src/components/notification/Notification.tsx",lineNumber:8,columnNumber:10},void 0);export{t as default};
