@@ -2,7 +2,7 @@ import { useState, lazy, Suspense } from 'react'
 import { useDispatch } from 'react-redux'
 import { type Question, deleteQuestion } from '../../redux/questionsSlice'
 import Button from '../button/Button'
-
+import styles from './QuestionList.module.css'
 const UpdateForm = lazy(async () => await import('../form/UpdateForm'))
 interface QuestionItemProps {
   item: Question
@@ -23,13 +23,14 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
 
   return (
     <>
-      <div className="question-container">
-        <div className="information">
+      <div className={styles.questionContainer}>
+        <div className={styles.information}>
           <span>{item.question}</span>
           {isExpanded && <p>Answer: {item.answer}</p>}
         </div>
-        <div className="button-group">
+        <div className={styles.buttonGroup}>
           <Button
+            color="gray"
             ariaLabel={expandLabel}
             type="button"
             onClick={() => {
@@ -40,6 +41,7 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
           </Button>
 
           <Button
+            color="gray"
             ariaLabel="Remove"
             className="gray"
             type="button"

@@ -6,7 +6,7 @@ import Button from '../button/Button'
 import { debounce } from '../../utils/debounce'
 import { getAddFormErrors } from '../../redux/selectors'
 import TextArea from '../textArea/TextArea'
-import './Form.css'
+import styles from './Form.module.css'
 import { lazy } from 'react'
 import { createErrors } from '../../utils/validateForm'
 import { trimQuestion } from '../../utils/trimQuestion'
@@ -93,7 +93,7 @@ const Form = () => {
 
   return (
     <div>
-      <form className="form" onSubmit={submitHandler}>
+      <form className={styles.form} onSubmit={submitHandler}>
         <Input
           type="text"
           label="Question"
@@ -109,7 +109,7 @@ const Form = () => {
           value={questionItem.answer}
           error={getFormErrorsValue('answer')}
         />
-        <label className="align-end">
+        <label className={styles.alignEnd}>
           Tick here for delay
           <input
             aria-label="debounce add question"
@@ -124,7 +124,8 @@ const Form = () => {
         <Button
           loading={loading}
           type="submit"
-          className="align-end green"
+          className={styles.alignEnd}
+          color="green"
           ariaLabel=" create question"
         >
           create question

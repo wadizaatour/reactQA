@@ -6,7 +6,12 @@ describe('button', () => {
 
   it('button is able to render when page is loaded', () => {
     render(
-      <Button ariaLabel="CreateQuestion" testId="button1" type={'button'}>
+      <Button
+        color="gray"
+        ariaLabel="CreateQuestion"
+        testId="button1"
+        type={'button'}
+      >
         button test
       </Button>
     )
@@ -15,6 +20,7 @@ describe('button', () => {
   it('calls the onClick function when clicked', () => {
     render(
       <Button
+        color="gray"
         ariaLabel="Test Button"
         testId="test-button"
         type="button"
@@ -34,6 +40,7 @@ describe('button', () => {
   it('calls the onClick function when "Enter" key is pressed', () => {
     render(
       <Button
+        color="gray"
         ariaLabel="Test Button"
         testId="test-button"
         type="button"
@@ -53,6 +60,7 @@ describe('button', () => {
   it('calls the onClick function when "Space" key is pressed', () => {
     render(
       <Button
+        color="gray"
         ariaLabel="Test Button"
         testId="test-button"
         type="button"

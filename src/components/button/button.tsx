@@ -1,8 +1,10 @@
-import './Button.css'
+import classNames from 'classnames'
+import styles from './Button.module.css'
 
 export interface ButtonProps {
   testId?: string
   className?: string
+  color: string
   ariaLabel: string
   children: string
   loading?: boolean
@@ -13,6 +15,7 @@ export interface ButtonProps {
 const Button = ({
   className,
   ariaLabel,
+  color,
   loading,
   children,
   type,
@@ -27,7 +30,12 @@ const Button = ({
 
   return (
     <button
-      className={className}
+      className={classNames(className, styles.button, {
+        [styles.red]: color === 'red',
+        [styles.green]: color === 'green',
+        [styles.blue]: color === 'blue'
+      })}
+      color={color}
       data-testid={testId}
       type={type}
       role="button"

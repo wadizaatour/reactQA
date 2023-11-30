@@ -1,9 +1,7 @@
 import { type ChangeEvent } from 'react'
 import { useDispatch } from 'react-redux'
-import {
-  setAddFormErrors
-} from '../../redux/questionsSlice'
-import './TextArea.css'
+import { setAddFormErrors } from '../../redux/questionsSlice'
+import styles from './TextArea.module.css'
 
 interface TextAreaProps {
   label: string
@@ -21,12 +19,11 @@ const TextArea = ({ label, error, onChange, value }: TextAreaProps) => {
   }
   const handleFocus = () => {
     dispatch(setAddFormErrors({}))
-  
   }
 
   return (
     <div>
-      <label className="label-textarea" htmlFor={label}>
+      <label className={styles.labelTextarea} htmlFor={label}>
         {label}
         <textarea
           placeholder="Add your answer here"
@@ -37,7 +34,7 @@ const TextArea = ({ label, error, onChange, value }: TextAreaProps) => {
           onFocus={handleFocus}
         />
       </label>
-      <small className="error">{error}</small>
+      <small className={styles.error}>{error}</small>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import './Tooltip.css'
+import styles from './Tooltip.module.css'
 
 interface TooltipProps {
   children: ReactNode
@@ -19,12 +19,12 @@ const Tooltip = ({ children, text }: TooltipProps) => {
 
   return (
     <div
-      className="tooltip-container"
+      className={styles.tooltipContainer}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {children}
-      {isTooltipVisible && <div className="tooltip">{text}</div>}
+      {isTooltipVisible && <div className={styles.tooltip}>{text}</div>}
     </div>
   )
 }

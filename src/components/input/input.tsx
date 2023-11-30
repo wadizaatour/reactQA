@@ -1,9 +1,7 @@
 import { type ChangeEvent } from 'react'
 import { useDispatch } from 'react-redux'
-import {
-  setAddFormErrors
-} from '../../redux/questionsSlice'
-import './Input.css'
+import { setAddFormErrors } from '../../redux/questionsSlice'
+import styles from './Input.module.css'
 
 interface InputProps {
   type: 'text' | 'password' | 'email' // specify allowed input types
@@ -32,12 +30,11 @@ const Input = ({
   }
   const handleFocus = () => {
     dispatch(setAddFormErrors({}))
-  
   }
 
   return (
     <>
-      <label className="label-input" htmlFor={label}>
+      <label className={styles.labelInput} htmlFor={label}>
         {label}
         <input
           aria-labelledby={lowercaseLabel}
@@ -50,7 +47,7 @@ const Input = ({
           onFocus={handleFocus}
         />
       </label>
-      <small className="error">{error}</small>
+      <small className={styles.error}>{error}</small>
     </>
   )
 }

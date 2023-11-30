@@ -1,11 +1,11 @@
-import './Notification.css'
+import styles from './Notification.module.css'
 
 interface NotificationProps {
   message: string
 }
 
 const Notification = ({ message }: NotificationProps) => {
-  return <span className="notification">{message}</span>
+  return <span className={styles.notification}>{message}</span>
 }
 
 export default Notification

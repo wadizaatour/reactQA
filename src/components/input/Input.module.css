@@ -4,5 +4,5 @@
   gap: 4px;
 }
 .error {
-  color: red;
+  color: var(--red);
 }

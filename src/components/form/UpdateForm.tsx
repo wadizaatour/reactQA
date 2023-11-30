@@ -4,7 +4,7 @@ import { type FormEvent, useState } from 'react'
 import { updateQuestion } from '../../redux/questionsSlice'
 import Button from '../button/Button'
 import TextArea from '../textArea/TextArea'
-import './Form.css'
+import styles from './Form.module.css'
 
 interface UpdateFormProps {
   questionId?: number
@@ -45,7 +45,7 @@ const UpdateForm = ({ questionId }: UpdateFormProps) => {
 
   return (
     <div>
-      <form className="form" onSubmit={submitHandler}>
+      <form className={styles.form} onSubmit={submitHandler}>
         <Input
           type="text"
           label="UpdateQuestion"
@@ -59,7 +59,12 @@ const UpdateForm = ({ questionId }: UpdateFormProps) => {
           onChange={handleAnswerChange}
           value={questionItem.answer}
         />
-        <Button type="submit" className="align-end" ariaLabel="update">
+        <Button
+          color="green"
+          type="submit"
+          className={styles.alignEnd}
+          ariaLabel="update"
+        >
           update
         </Button>
       </form>

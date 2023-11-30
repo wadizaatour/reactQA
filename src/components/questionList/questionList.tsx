@@ -6,8 +6,8 @@ import {
 } from '../../redux/questionsSlice'
 import { useDispatch } from 'react-redux'
 import Button from '../button/Button'
-import QuestionItem from '../questionItem/QuestionItem'
-import './QuestionList.css'
+import QuestionItem from './QuestionItem'
+import styles from './QuestionList.module.css'
 import Alert from '../alert/Alert'
 
 interface QuestionListProps {
@@ -27,9 +27,9 @@ const QuestionList = ({ list }: QuestionListProps) => {
 
   return (
     <section>
-      <ul className="accordion">
+      <ul className={styles.accordion}>
         {list?.map((questionItem: Question) => (
-          <li className="content" key={questionItem.id}>
+          <li className={styles.content} key={questionItem.id}>
             <QuestionItem item={questionItem} />
           </li>
         ))}
@@ -37,19 +37,19 @@ const QuestionList = ({ list }: QuestionListProps) => {
       {list.length === 0 ? (
         <Alert message="No questions yet" />
       ) : (
-        <div className="button-group">
+        <div className={styles.buttonGroup}>
           <Button
             type="button"
             ariaLabel="Sort questions"
-            className="blue"
+            color="blue"
             onClick={handleSort}
           >
             Sort questions
           </Button>
           <Button
+            color="red"
             type="button"
             ariaLabel="Remove questions"
-            className="red"
             onClick={handleDeleteAllQuestions}
           >
             Remove questions
