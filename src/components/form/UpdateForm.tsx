@@ -48,14 +48,14 @@ const UpdateForm = ({ questionId }: UpdateFormProps) => {
       <form className={styles.form} onSubmit={submitHandler}>
         <Input
           type="text"
-          label="UpdateQuestion"
+          label="Question"
           placeholder="you can update your question here"
           onChange={handleQuestionChange}
           disabled={false}
           value={questionItem.question}
         />
         <TextArea
-          label="UpdateAnswer"
+          label="Answer"
           onChange={handleAnswerChange}
           value={questionItem.answer}
         />

@@ -11,12 +11,17 @@ interface QuestionItemProps {
 const QuestionItem = ({ item }: QuestionItemProps) => {
   const dispatch = useDispatch()
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
+  const [isUpdating, setIsUpdating] = useState<boolean>(false)
   const handleRemoveQuestionAndAnswer = (questionId: number) => {
     dispatch(deleteQuestion(questionId))
   }
 
   const toggleQuestionExpansion = () => {
     setIsExpanded(!isExpanded)
+    setIsUpdating(false)
+  }
+  const toggleUpdateExpansion = () => {
+    setIsUpdating(!isUpdating)
   }
 
   const expandLabel = isExpanded ? '-' : '+'
@@ -25,7 +30,8 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
     <>
       <div className={styles.questionContainer}>
         <div className={styles.information}>
-          <span>{item.question}</span>
+          <p>{item.question}</p>
+
           {isExpanded && <p>Answer: {item.answer}</p>}
         </div>
         <div className={styles.buttonGroup}>
@@ -38,6 +44,16 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
             }}
           >
             {expandLabel}
+          </Button>
+          <Button
+            color="gray"
+            ariaLabel="update"
+            type="button"
+            onClick={() => {
+              toggleUpdateExpansion()
+            }}
+          >
+            update
           </Button>
 
           <Button
@@ -54,7 +70,7 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
         </div>
       </div>
 
-      {isExpanded && (
+      {isUpdating && (
         <Suspense>
           <UpdateForm questionId={item.id} />
         </Suspense>
