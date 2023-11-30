@@ -1,79 +1,82 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import Button from './Button'
 
-describe('button', () => {
-  const onClickMock = jest.fn()
-
-  it('button is able to render when page is loaded', () => {
-    render(
+describe('Button component', () => {
+  it('calls onClick handler when the button is clicked', () => {
+    const onClickMock = jest.fn()
+    const { getByTestId } = render(
       <Button
-        color="gray"
-        ariaLabel="CreateQuestion"
-        testId="button1"
-        type={'button'}
-      >
-        button test
-      </Button>
-    )
-    expect(screen.getByTestId('button1')).toBeInTheDocument()
-  })
-  it('calls the onClick function when clicked', () => {
-    render(
-      <Button
-        color="gray"
-        ariaLabel="Test Button"
-        testId="test-button"
         type="button"
+        testId="test-button"
+        color="blue"
+        ariaLabel="Example Button"
         onClick={onClickMock}
       >
         Click me
       </Button>
     )
 
-    const buttonElement = screen.getByTestId('test-button')
-    fireEvent.click(buttonElement)
+    const button = getByTestId('test-button')
+    fireEvent.click(button)
 
-    // Check if the onClick function is called
     expect(onClickMock).toHaveBeenCalled()
   })
 
-  it('calls the onClick function when "Enter" key is pressed', () => {
-    render(
+  it('calls onClick handler when the button is triggered by keyboard (Enter/Space)', () => {
+    const onClickMock = jest.fn()
+    const { getByTestId } = render(
       <Button
-        color="gray"
-        ariaLabel="Test Button"
-        testId="test-button"
         type="button"
+        testId="test-button"
+        color="blue"
+        ariaLabel="Example Button"
         onClick={onClickMock}
       >
         Click me
       </Button>
     )
 
-    const buttonElement = screen.getByTestId('test-button')
-    fireEvent.keyDown(buttonElement, { key: 'Enter', code: 'Enter' })
+    const button = getByTestId('test-button')
+    fireEvent.keyDown(button, { key: 'Enter' })
 
-    // Check if the onClick function is called
     expect(onClickMock).toHaveBeenCalled()
+
+    fireEvent.keyDown(button, { key: ' ' })
+
+    expect(onClickMock).toHaveBeenCalledTimes(2)
   })
 
-  it('calls the onClick function when "Space" key is pressed', () => {
-    render(
+  it('renders a spinner when loading prop is true', () => {
+    const { getByTestId } = render(
       <Button
-        color="gray"
-        ariaLabel="Test Button"
-        testId="test-button"
         type="button"
-        onClick={onClickMock}
+        testId="test-button"
+        color="blue"
+        ariaLabel="Example Button"
+        loading={true}
       >
         Click me
       </Button>
     )
 
-    const buttonElement = screen.getByTestId('test-button')
-    fireEvent.keyDown(buttonElement, { key: ' ', code: 'Space' })
+    const spinner = getByTestId('test-button').querySelector('.spinner')
+    expect(spinner).toBeInTheDocument()
+  })
 
-    // Check if the onClick function is called
-    expect(onClickMock).toHaveBeenCalled()
+  it('does not render a spinner when loading prop is false', () => {
+    const { getByTestId } = render(
+      <Button
+        type="button"
+        testId="test-button"
+        color="blue"
+        ariaLabel="Example Button"
+        loading={false}
+      >
+        Click me
+      </Button>
+    )
+
+    const spinner = getByTestId('test-button').querySelector('.spinner')
+    expect(spinner).not.toBeInTheDocument()
   })
 })
