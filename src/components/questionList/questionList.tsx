@@ -26,7 +26,7 @@ const QuestionList = ({ list }: QuestionListProps) => {
   }
 
   return (
-    <section>
+    <>
       <ul className={styles.accordion}>
         {list?.map((questionItem: Question) => (
           <li className={styles.content} key={questionItem.id}>
@@ -56,7 +56,7 @@ const QuestionList = ({ list }: QuestionListProps) => {
           </Button>
         </div>
       )}
-    </section>
+    </>
   )
 }
 

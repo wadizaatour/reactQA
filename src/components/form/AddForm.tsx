@@ -92,7 +92,7 @@ const Form = () => {
   }
 
   return (
-    <div>
+    <>
       <form className={styles.form} onSubmit={submitHandler}>
         <Input
           type="text"
@@ -136,7 +136,7 @@ const Form = () => {
           <Notification message="Question added" />
         </Suspense>
       )}
-    </div>
+    </>
   )
 }
 
