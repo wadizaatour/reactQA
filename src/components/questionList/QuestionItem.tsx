@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { type Question, deleteQuestion } from '../../redux/questionsSlice'
 import Button from '../button/Button'
 import styles from './QuestionList.module.css'
+
 const UpdateForm = lazy(async () => await import('../form/UpdateForm'))
 interface QuestionItemProps {
   item: Question
@@ -24,8 +25,6 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
     setIsUpdating(!isUpdating)
   }
 
-  const expandLabel = isExpanded ? '-' : '+'
-
   return (
     <>
       <div className={styles.questionContainer}>
@@ -36,27 +35,26 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
         </div>
         <div className={styles.buttonGroup}>
           <Button
+            icon="expand"
             color="gray"
-            ariaLabel={expandLabel}
+            ariaLabel="expand"
             type="button"
             onClick={() => {
               toggleQuestionExpansion()
             }}
-          >
-            {expandLabel}
-          </Button>
+          ></Button>
           <Button
+            icon="edit"
             color="gray"
             ariaLabel="update"
             type="button"
             onClick={() => {
               toggleUpdateExpansion()
             }}
-          >
-            update
-          </Button>
+          ></Button>
 
           <Button
+            icon="delete"
             color="gray"
             ariaLabel="Remove"
             className="gray"
@@ -64,9 +62,7 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
             onClick={() => {
               handleRemoveQuestionAndAnswer(item.id)
             }}
-          >
-            Remove
-          </Button>
+          ></Button>
         </div>
       </div>
 
