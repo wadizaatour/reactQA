@@ -3,6 +3,7 @@ import styles from './Button.module.css'
 import { Suspense, lazy } from 'react'
 
 export interface ButtonProps {
+  type: 'submit' | 'button'
   testId?: string
   icon?: string
   className?: string
@@ -10,7 +11,6 @@ export interface ButtonProps {
   ariaLabel: string
   children?: string
   loading?: boolean
-  type: 'submit' | 'button'
   onClick?: () => void
 }
 
@@ -50,10 +50,8 @@ const Button = ({
       onClick={onClick}
       onKeyDown={handleKeyDown}
     >
-      <Suspense>
-        {icon !== undefined && <LazyIcon />}
-      </Suspense>
-      {loading === true ? <span className="spinner" /> : null}
+      {loading === true ? <span className={styles.spinner} /> : null}
+      <Suspense>{icon !== undefined && <LazyIcon />}</Suspense>
       {children}
     </button>
   )
