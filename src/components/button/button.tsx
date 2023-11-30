@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import styles from './Button.module.css'
 import { Suspense, lazy } from 'react'
-// import Delete from '../../assets/delete.svg?react'
+
 export interface ButtonProps {
   testId?: string
   icon?: string
@@ -34,6 +34,7 @@ const Button = ({
   const LazyIcon = lazy(
     async () => await import(`../../assets/${icon}.svg?react`)
   )
+
   return (
     <button
       className={classNames(className, styles.button, {
@@ -49,7 +50,9 @@ const Button = ({
       onClick={onClick}
       onKeyDown={handleKeyDown}
     >
-      <Suspense>{icon !== undefined && <LazyIcon />}</Suspense>
+      <Suspense>
+        {icon !== undefined && <LazyIcon />}
+      </Suspense>
       {loading === true ? <span className="spinner" /> : null}
       {children}
     </button>
