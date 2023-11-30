@@ -55,7 +55,7 @@ const Form = () => {
       question: questionItem.question,
       answer: questionItem.answer
     })
-    dispatch(addQuestion(trimmedQuestion))
+    if (!loading) dispatch(addQuestion(trimmedQuestion))
     clearForm()
     setShowNotification(true)
     setLoading(false)
