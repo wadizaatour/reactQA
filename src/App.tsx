@@ -8,7 +8,7 @@ import { getQuestionsList, getTotalQuestions } from './redux/selectors'
 
 function App() {
   const dispatch = useDispatch()
-  const questionsState = useSelector(getQuestionsList)
+  const questionsList = useSelector(getQuestionsList)
   const totalQuestions = useSelector(getTotalQuestions)
   useEffect(() => {
     dispatch(setAllQuestionList())
@@ -25,7 +25,7 @@ function App() {
           question
         </aside>
         <section className="section-list">
-          <QuestionList list={questionsState} />
+          <QuestionList list={questionsList} />
         </section>
         <section className="section-form">
           <AddForm />
