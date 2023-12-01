@@ -31,7 +31,7 @@ function App() {
           <AddForm />
         </section>
       </main>
-      <footer>Wadi Zaatour</footer>
+      <footer>Developed by: Wadi Zaatour</footer>
     </>
   )
 }
