@@ -10,6 +10,7 @@ import styles from './Form.module.css'
 import { lazy } from 'react'
 import { createErrors } from '../../utils/validateForm'
 import { trimQuestion } from '../../utils/trimQuestion'
+import Tooltip from '../tooltip/Tooltip'
 
 const Notification = lazy(
   async () => await import('../notification/Notification')
@@ -94,6 +95,9 @@ const Form = () => {
   return (
     <>
       <form className={styles.form} onSubmit={submitHandler}>
+        <Tooltip text="This is a tooltip">
+          <h2 aria-describedby="create-new-question">Create a new question</h2>
+        </Tooltip>
         <Input
           type="text"
           label="Question"

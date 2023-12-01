@@ -15,14 +15,13 @@
 }
 
 .content {
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   display: flex;
   flex-direction: column;
   padding: 10px;
   border: 1px solid var(--white);
   border-radius: 6px;
   background-color: var(--dark-gray);
-  margin: 4px;
 }
 
 .question-container {

@@ -19,9 +19,11 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
 
   const toggleQuestionExpansion = () => {
     setIsExpanded(!isExpanded)
-    setIsUpdating(false)
+    if (isUpdating) setIsUpdating(false)
   }
   const toggleUpdateExpansion = () => {
+    if (!isExpanded) setIsExpanded(true)
+    if (isUpdating) setIsExpanded(false)
     setIsUpdating(!isUpdating)
   }
 

@@ -9,6 +9,7 @@ import Button from '../button/Button'
 import QuestionItem from './QuestionItem'
 import styles from './QuestionList.module.css'
 import Alert from '../alert/Alert'
+import Tooltip from '../tooltip/Tooltip'
 
 interface QuestionListProps {
   list: Question[]
@@ -27,6 +28,9 @@ const QuestionList = ({ list }: QuestionListProps) => {
 
   return (
     <>
+     <Tooltip text="This is a tooltip">
+            <h2 aria-describedby="created-question"> Created Question</h2>
+          </Tooltip>
       <ul className={styles.accordion}>
         {list?.map((questionItem: Question) => (
           <li className={styles.content} key={questionItem.id}>
