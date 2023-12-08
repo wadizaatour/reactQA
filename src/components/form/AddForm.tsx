@@ -43,7 +43,7 @@ const Form = () => {
     if (showNotification) {
       const timer = setTimeout(() => {
         setShowNotification(false)
-      }, 3000)
+      }, 6000)
 
       return () => {
         clearTimeout(timer)
