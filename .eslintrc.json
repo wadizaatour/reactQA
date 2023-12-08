@@ -18,7 +18,8 @@
     "jest.config.js",
     "babel.config.js",
     "setup-tests.js",
-    "svg.d.ts"
+    "svg.d.ts",
+    "vite-env.d.ts"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
