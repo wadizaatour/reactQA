@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, lazy, Suspense } from 'react'
 import {
   type Question,
   deleteAll,
@@ -8,9 +8,9 @@ import { useDispatch } from 'react-redux'
 import Button from '../button/Button'
 import QuestionItem from './QuestionItem'
 import styles from './QuestionList.module.css'
-import Alert from '../alert/Alert'
 import Tooltip from '../tooltip/Tooltip'
 
+const Alert = lazy(async () => await import('../alert/Alert'))
 interface QuestionListProps {
   list: Question[]
 }
@@ -39,7 +39,9 @@ const QuestionList = ({ list }: QuestionListProps) => {
         ))}
       </ul>
       {list.length === 0 ? (
-        <Alert message="No questions yet" />
+        <Suspense>
+          <Alert message="No questions yet" />
+        </Suspense>
       ) : (
         <div className={styles.buttonGroup}>
           <Button
