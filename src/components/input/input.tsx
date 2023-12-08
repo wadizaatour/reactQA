@@ -34,12 +34,12 @@ const Input = ({
 
   return (
     <>
-      <label className={styles.labelInput} htmlFor={label}>
+      <label className={styles.labelInput} htmlFor={lowercaseLabel}>
         {label}
         <input
-          aria-labelledby={lowercaseLabel}
+          aria-label={lowercaseLabel}
           type={type}
-          id={lowercaseLabel} // Use lowercase label as ID
+          id={lowercaseLabel}
           value={value}
           placeholder={placeholder}
           onChange={handleChange}

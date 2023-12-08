@@ -13,4 +13,23 @@ describe('TextArea component', () => {
 
     expect(container).toBeInTheDocument()
   })
+
+  it('renders with error message', () => {
+    const { getByLabelText, getByText } = render(
+      <Provider store={store}>
+        <TextArea
+          label="Test Label"
+          value=""
+          onChange={() => {}}
+          error="Test Error"
+        />
+      </Provider>
+    )
+
+    const textareaElement = getByLabelText('Test Label')
+    const errorElement = getByText('Test Error')
+
+    expect(textareaElement).toBeInTheDocument()
+    expect(errorElement).toBeInTheDocument()
+  })
 })
