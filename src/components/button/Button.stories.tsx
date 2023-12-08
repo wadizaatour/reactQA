@@ -1,5 +1,6 @@
 import Button, { type ButtonProps } from './Button'
 import styles from './Button.module.css'
+
 export default {
   title: 'Button',
   component: Button

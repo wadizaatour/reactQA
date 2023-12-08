@@ -28,9 +28,9 @@ const QuestionList = ({ list }: QuestionListProps) => {
 
   return (
     <>
-     <Tooltip text="This is a tooltip">
-            <h2 aria-describedby="created-question"> Created Question</h2>
-          </Tooltip>
+      <Tooltip text="This is a tooltip">
+        <h2 aria-describedby="created-question"> Created Question</h2>
+      </Tooltip>
       <ul className={styles.accordion}>
         {list?.map((questionItem: Question) => (
           <li className={styles.content} key={questionItem.id}>

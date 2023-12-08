@@ -8,7 +8,7 @@ import { getAddFormErrors } from '../../redux/selectors'
 import TextArea from '../textArea/TextArea'
 import styles from './Form.module.css'
 import { lazy } from 'react'
-import { createErrors } from '../../utils/validateForm'
+import { createErrors } from '../../utils/createErrors'
 import { trimQuestion } from '../../utils/trimQuestion'
 import Tooltip from '../tooltip/Tooltip'
 

@@ -44,31 +44,29 @@ const UpdateForm = ({ questionId }: UpdateFormProps) => {
   }
 
   return (
-    <div>
-      <form className={styles.form} onSubmit={submitHandler}>
-        <Input
-          type="text"
-          label="Question"
-          placeholder="you can update your question here"
-          onChange={handleQuestionChange}
-          disabled={false}
-          value={questionItem.question}
-        />
-        <TextArea
-          label="Answer"
-          onChange={handleAnswerChange}
-          value={questionItem.answer}
-        />
-        <Button
-          color="green"
-          type="submit"
-          className={styles.alignEnd}
-          ariaLabel="update"
-        >
-          update
-        </Button>
-      </form>
-    </div>
+    <form className={styles.form} onSubmit={submitHandler}>
+      <Input
+        type="text"
+        label="Question"
+        placeholder="you can update your question here"
+        onChange={handleQuestionChange}
+        disabled={false}
+        value={questionItem.question}
+      />
+      <TextArea
+        label="Answer"
+        onChange={handleAnswerChange}
+        value={questionItem.answer}
+      />
+      <Button
+        color="green"
+        type="submit"
+        className={styles.alignEnd}
+        ariaLabel="update"
+      >
+        update
+      </Button>
+    </form>
   )
 }
 

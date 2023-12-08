@@ -7,5 +7,6 @@ export function trimQuestion(questionItem: QuestionItem): QuestionItem {
     question: questionItem.question?.trim(),
     answer: questionItem.answer?.trim()
   }
+  
   return trimmedQuestion
 }
