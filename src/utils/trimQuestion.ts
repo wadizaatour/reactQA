@@ -1,4 +1,4 @@
-export interface QuestionItem {
+interface QuestionItem {
   question: string
   answer: string
 }
@@ -7,6 +7,6 @@ export function trimQuestion(questionItem: QuestionItem): QuestionItem {
     question: questionItem.question?.trim(),
     answer: questionItem.answer?.trim()
   }
-  
+
   return trimmedQuestion
 }
