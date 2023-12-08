@@ -1,0 +1,1 @@
+import{j as r}from"./index-xKtuI53W.js";const t=({message:e})=>r.jsxDEV("div",{className:"alert-error",children:e},void 0,!1,{fileName:"C:/Users/wadi/Documents/repos/reactQA/src/components/alert/Alert.tsx",lineNumber:8,columnNumber:10},void 0);export{t as default};
