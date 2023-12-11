@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux'
-import Input from '../input/Input'
+import Input from '../Input/Input'
 import { type FormEvent, useState } from 'react'
 import { updateQuestion } from '../../redux/questionsSlice'
-import Button from '../button/Button'
-import TextArea from '../textArea/TextArea'
+import Button from '../Button/Button'
+import TextArea from '../TextArea/TextArea'
 import styles from './Form.module.css'
 
 interface UpdateFormProps {
@@ -39,7 +39,7 @@ const UpdateForm = ({ questionId }: UpdateFormProps) => {
       clearForm()
     }
   }
-  
+
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     handleUpdateQuestion()

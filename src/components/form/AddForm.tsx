@@ -1,19 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux'
-import Input from '../input/Input'
+import Input from '../Input/Input'
 import { type FormEvent, useRef, useState, useEffect, Suspense } from 'react'
 import { addQuestion, setAddFormErrors } from '../../redux/questionsSlice'
-import Button from '../button/Button'
+import Button from '../Button/Button'
 import { debounce } from '../../utils/debounce'
 import { selectAddFormErrors } from '../../redux/selectors'
-import TextArea from '../textArea/TextArea'
+import TextArea from '../TextArea/TextArea'
 import styles from './Form.module.css'
 import { lazy } from 'react'
 import { createErrors } from '../../utils/createErrors'
 import { trimQuestionItem } from '../../utils/trimQuestionItem'
-import Tooltip from '../tooltip/Tooltip'
+import Tooltip from '../Tooltip/Tooltip'
 
 const Notification = lazy(
-  async () => await import('../notification/Notification')
+  async () => await import('../Notification/Notification')
 )
 const Form = () => {
   const dispatch = useDispatch()

@@ -5,12 +5,12 @@ import {
   sortQuestionList
 } from '../../redux/questionsSlice'
 import { useDispatch } from 'react-redux'
-import Button from '../button/Button'
+import Button from '../Button/Button'
 import QuestionItem from './QuestionItem'
 import styles from './QuestionList.module.css'
-import Tooltip from '../tooltip/Tooltip'
+import Tooltip from '../Tooltip/Tooltip'
 
-const Alert = lazy(async () => await import('../alert/Alert'))
+const Alert = lazy(async () => await import('../Alert/Alert'))
 
 interface QuestionListProps {
   list: Question[]

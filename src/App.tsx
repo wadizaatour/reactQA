@@ -1,9 +1,9 @@
-import QuestionList from './components/questionList/QuestionList'
+import QuestionList from './components/QuestionList/QuestionList'
 import './App.css'
 import { setAllQuestionList } from './redux/questionsSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import AddForm from './components/form/AddForm'
+import AddForm from './components/Form/AddForm'
 import { selectQuestionsList, selectTotalQuestions } from './redux/selectors'
 
 function App() {

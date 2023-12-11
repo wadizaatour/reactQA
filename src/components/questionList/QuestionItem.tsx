@@ -1,10 +1,10 @@
 import { useState, lazy, Suspense } from 'react'
 import { useDispatch } from 'react-redux'
 import { type Question, deleteQuestion } from '../../redux/questionsSlice'
-import Button from '../button/Button'
+import Button from '../Button/Button'
 import styles from './QuestionList.module.css'
 
-const UpdateForm = lazy(async () => await import('../form/UpdateForm'))
+const UpdateForm = lazy(async () => await import('../Form/UpdateForm'))
 interface QuestionItemProps {
   item: Question
 }
