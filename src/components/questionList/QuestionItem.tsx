@@ -13,6 +13,7 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
   const dispatch = useDispatch()
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
   const [isUpdating, setIsUpdating] = useState<boolean>(false)
+
   const handleRemoveQuestionAndAnswer = (questionId: number) => {
     dispatch(deleteQuestion(questionId))
   }
@@ -21,6 +22,7 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
     setIsExpanded(!isExpanded)
     if (isUpdating) setIsUpdating(false)
   }
+
   const toggleUpdateExpansion = () => {
     if (!isExpanded) setIsExpanded(true)
     if (isUpdating) setIsExpanded(false)
@@ -32,7 +34,6 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
       <div className={styles.questionContainer}>
         <div className={styles.information}>
           <p>{item.question}</p>
-
           {isExpanded && <p>Answer: {item.answer}</p>}
         </div>
         <div className={styles.buttonGroup}>
@@ -54,7 +55,6 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
               toggleUpdateExpansion()
             }}
           ></Button>
-
           <Button
             icon="delete"
             color="gray"
@@ -67,7 +67,6 @@ const QuestionItem = ({ item }: QuestionItemProps) => {
           ></Button>
         </div>
       </div>
-
       {isUpdating && (
         <Suspense>
           <UpdateForm questionId={item.id} />
