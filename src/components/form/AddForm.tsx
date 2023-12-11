@@ -4,12 +4,12 @@ import { type FormEvent, useRef, useState, useEffect, Suspense } from 'react'
 import { addQuestion, setAddFormErrors } from '../../redux/questionsSlice'
 import Button from '../button/Button'
 import { debounce } from '../../utils/debounce'
-import { getAddFormErrors } from '../../redux/selectors'
+import { selectAddFormErrors } from '../../redux/selectors'
 import TextArea from '../textArea/TextArea'
 import styles from './Form.module.css'
 import { lazy } from 'react'
 import { createErrors } from '../../utils/createErrors'
-import { trimQuestion } from '../../utils/trimQuestion'
+import { trimQuestionItem } from '../../utils/trimQuestionItem'
 import Tooltip from '../tooltip/Tooltip'
 
 const Notification = lazy(
@@ -21,7 +21,7 @@ const Form = () => {
   const [loading, setLoading] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [questionItem, setQuestionItem] = useState(intialQuestionState)
-  const formErrors = useSelector(getAddFormErrors)
+  const formErrors = useSelector(selectAddFormErrors)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleQuestionChange = (question: string) => {
@@ -52,7 +52,7 @@ const Form = () => {
   }, [showNotification])
 
   const addNewQuestion = () => {
-    const trimmedQuestion = trimQuestion({
+    const trimmedQuestion = trimQuestionItem({
       question: questionItem.question,
       answer: questionItem.answer
     })

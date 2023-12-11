@@ -2,11 +2,9 @@ interface QuestionItem {
   question: string
   answer: string
 }
-export function trimQuestion(questionItem: QuestionItem): QuestionItem {
-  const trimmedQuestion = {
+export function trimQuestionItem(questionItem: QuestionItem): QuestionItem {
+  return {
     question: questionItem.question?.trim(),
     answer: questionItem.answer?.trim()
   }
-
-  return trimmedQuestion
 }

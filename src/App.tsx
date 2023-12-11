@@ -4,12 +4,12 @@ import { setAllQuestionList } from './redux/questionsSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import AddForm from './components/form/AddForm'
-import { getQuestionsList, getTotalQuestions } from './redux/selectors'
+import { selectQuestionsList, selectTotalQuestions } from './redux/selectors'
 
 function App() {
   const dispatch = useDispatch()
-  const questionsList = useSelector(getQuestionsList)
-  const totalQuestions = useSelector(getTotalQuestions)
+  const questionsList = useSelector(selectQuestionsList)
+  const totalQuestions = useSelector(selectTotalQuestions)
 
   useEffect(() => {
     dispatch(setAllQuestionList())
