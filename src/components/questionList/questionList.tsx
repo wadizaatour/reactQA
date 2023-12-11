@@ -11,6 +11,7 @@ import styles from './QuestionList.module.css'
 import Tooltip from '../tooltip/Tooltip'
 
 const Alert = lazy(async () => await import('../alert/Alert'))
+
 interface QuestionListProps {
   list: Question[]
 }

@@ -10,6 +10,7 @@ function App() {
   const dispatch = useDispatch()
   const questionsList = useSelector(getQuestionsList)
   const totalQuestions = useSelector(getTotalQuestions)
+
   useEffect(() => {
     dispatch(setAllQuestionList())
   }, [dispatch])
