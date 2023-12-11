@@ -11,7 +11,6 @@
   - [Adding Questions](#adding-questions)
   - [Viewing Questions](#viewing-questions)
 - [Redux Toolkit](#redux-toolkit)
- 
 
 ## Introduction
 
@@ -22,8 +21,8 @@ Welcome to the reactQA! This application allows users to add questions through a
 - Add questions using a form input.
 - Display a list of added questions.
 - Delete all questions or separately
+- Sort list of questions
 - Tooltip
-  
 
 ## Getting Started
 
@@ -53,33 +52,32 @@ Make sure you have the following installed on your machine:
    npm install
    ```
 
-## Usage
+### To run the application
 
-### Adding Questions
+```bash
+npm run dev
+```
 
-To add a question, follow these steps:
+### To run storybook
 
-1. Open the application in your preferred code editor.
+```bash
+npm run storybook
+```
 
-2. Locate the `AddQuestionForm` component.
+### To run test
 
-3. Enter the question in the input field.
+```bash
+npm run test
+```
 
-4. Click the "Add Question" button.
+### To build to production
 
-### Viewing Questions
+```bash
+npm run build
+```
 
-To view the list of questions, follow these steps:
+### To deploy to gh-pages
 
-1. Open the application in your preferred code editor.
-
-2. Locate the `QuestionList` component.
-
-3. The list of questions will be displayed on the screen.
-
-## Redux Toolkit
-
-This application uses Redux Toolkit for state management. The Redux store is configured in the `store` directory, and actions and reducers are defined in the `features` directory.
-
-
----
+```bash
+npm run deploy
+```
