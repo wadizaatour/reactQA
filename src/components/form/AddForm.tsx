@@ -31,11 +31,11 @@ const Form = () => {
   const handleAnswerChange = (answer: string) => {
     setQuestionItem({ ...questionItem, answer })
   }
+
   const clearForm = () => {
     if (inputRef.current?.checked === true) {
       inputRef.current.checked = false
     }
-
     setQuestionItem(intialQuestionState)
   }
 
