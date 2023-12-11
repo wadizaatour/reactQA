@@ -95,7 +95,7 @@ const Form = () => {
   return (
     <>
       <form className={styles.form} onSubmit={submitHandler}>
-        <Tooltip text="Here you can createa new questions and their answers">
+        <Tooltip text="Here you can create a new questions and their answers">
           <h2 aria-describedby="create-new-question">Create a new question</h2>
         </Tooltip>
         <Input
