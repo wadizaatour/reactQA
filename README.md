@@ -9,12 +9,10 @@
   - [Installation](#installation)
 - [Usage](#usage)
   - [Adding Questions](#adding-questions)
-  - [Viewing Questions](#viewing-questions)
-- [Redux Toolkit](#redux-toolkit)
 
 ## Introduction
 
-Welcome to the reactQA! This application allows users to add questions through a form input and view them in a list. It utilizes React for the user interface and Redux Toolkit for state management.
+Welcome to the reactQA! This application allows users to add questions through a form input and view them in a list. It utilizes React for the user interface and Redux Toolkit for state management. React Testing library / Jest for testing, Vite for system bundler
 
 ## Features
 
@@ -22,7 +20,7 @@ Welcome to the reactQA! This application allows users to add questions through a
 - Display a list of added questions.
 - Delete all questions or separately
 - Sort list of questions
-- Tooltip
+- Responsivness
 
 ## Getting Started
 
