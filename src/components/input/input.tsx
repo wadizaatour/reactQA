@@ -24,10 +24,12 @@ const Input = ({
 }: InputProps) => {
   const lowercaseLabel = label.toLowerCase()
   const dispatch = useDispatch()
+  
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value
     onChange(newValue)
   }
+
   const handleFocus = () => {
     dispatch(setAddFormErrors({}))
   }

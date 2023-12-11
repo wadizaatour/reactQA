@@ -13,10 +13,12 @@ export interface TextAreaProps {
 const TextArea = ({ label, error, onChange, value }: TextAreaProps) => {
   const lowercaseLabel = label.toLowerCase()
   const dispatch = useDispatch()
+  
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value
     onChange(newValue)
   }
+
   const handleFocus = () => {
     dispatch(setAddFormErrors({}))
   }

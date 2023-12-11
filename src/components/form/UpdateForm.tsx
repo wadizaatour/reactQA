@@ -22,6 +22,7 @@ const UpdateForm = ({ questionId }: UpdateFormProps) => {
   const handleAnswerChange = (answer: string) => {
     setQuestionItem({ ...questionItem, answer })
   }
+
   const clearForm = () => {
     setQuestionItem(intialQuestionState)
   }
@@ -38,6 +39,7 @@ const UpdateForm = ({ questionId }: UpdateFormProps) => {
       clearForm()
     }
   }
+  
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     handleUpdateQuestion()
