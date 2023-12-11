@@ -54,14 +54,17 @@ li {
   margin: 0;
   padding: 0;
 }
+
 button {
   appearance: none;
   -webkit-appearance: none;
   color: inherit;
 }
+
 input {
   font-size: 16px;
 }
+
 textarea {
   font-size: 16px;
   min-width: 100%;
