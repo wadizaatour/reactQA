@@ -16,8 +16,3 @@ const Template = (args: TooltipProps) => (
 export const Default = (args: TooltipProps) => (
   <Template {...args} text="Hello Default"></Template>
 )
-export const WithCSSModules = (args: TooltipProps) => (
-  <Template {...args} text="Hello Custom">
-    Hello world
-  </Template>
-)

@@ -1,6 +1,6 @@
 import './Alert.css'
 
-interface AlertProps {
+export interface AlertProps {
   message: string
 }
 

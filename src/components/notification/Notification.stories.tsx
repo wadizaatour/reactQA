@@ -12,8 +12,3 @@ const Template = (args: NotificationProps) => (
 export const Default = (args: NotificationProps) => (
   <Template {...args} message="Default" />
 )
-
-// Story using CSS Modules
-export const WithCSSModules = (args: NotificationProps) => (
-  <Template {...args} message="hello world" />
-)

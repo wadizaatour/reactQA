@@ -9,15 +9,12 @@ export default {
 
 const Template = (args: TextAreaProps) => (
   <Provider store={store}>
-    <TextArea {...args}>TextArea</TextArea>
+    <div style={{ maxWidth: '500px' }}>
+      <TextArea {...args}>TextArea</TextArea>
+    </div>
   </Provider>
 )
 
 export const Default = (args: TextAreaProps) => (
-  <Template {...args} label="Default" />
-)
-
-// Story using CSS Modules
-export const WithCSSModules = (args: TextAreaProps) => (
   <Template {...args} label="Answer" />
 )
