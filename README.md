@@ -12,7 +12,7 @@
 
 ## Introduction
 
-Welcome to the reactQA! This application allows users to add questions through a form input and view them in a list. It utilizes React for the user interface and Redux Toolkit for state management. React Testing library / Jest for testing, Vite for system bundler snd storybook to showcase each component individually 
+Welcome to the reactQA! This application allows users to add questions through a form input and view them in a list. It utilizes React for the user interface and Redux Toolkit for state management. React Testing library / Jest for testing, Vite for system bundler and storybook to showcase each component individually 
 
 ## Features
 
