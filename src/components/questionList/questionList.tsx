@@ -28,7 +28,7 @@ const QuestionList = ({ list }: QuestionListProps) => {
 
   return (
     <>
-      <Tooltip text="This is a tooltip">
+      <Tooltip text="Here you can find created questions and their answer">
         <h2 aria-describedby="created-question"> Created Question</h2>
       </Tooltip>
       <ul className={styles.accordion}>
