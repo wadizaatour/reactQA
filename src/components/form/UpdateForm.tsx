@@ -16,11 +16,11 @@ const UpdateForm = ({ questionId }: UpdateFormProps) => {
   const [questionItem, setQuestionItem] = useState(intialQuestionState)
 
   const handleQuestionChange = (question: string) => {
-    setQuestionItem({ ...questionItem, question })
+    if (question !== '') setQuestionItem({ ...questionItem, question })
   }
 
   const handleAnswerChange = (answer: string) => {
-    setQuestionItem({ ...questionItem, answer })
+    if (answer !== '') setQuestionItem({ ...questionItem, answer })
   }
 
   const clearForm = () => {

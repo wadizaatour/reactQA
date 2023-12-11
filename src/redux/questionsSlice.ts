@@ -14,12 +14,10 @@ export interface FormError {
 interface QuestionsState {
   list: Question[]
   addformErrors: FormError
-  updateFormErros: FormError
 }
 const initialState: QuestionsState = {
   list: [],
-  addformErrors: {},
-  updateFormErros: {}
+  addformErrors: {}
 }
 
 const questionsSlice = createSlice({
