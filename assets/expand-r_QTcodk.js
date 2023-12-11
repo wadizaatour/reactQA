@@ -1,1 +1,0 @@
-import{r as e}from"./index-xKtuI53W.js";const o=t=>e.createElement("svg",{width:"20px",height:"20px",viewBox:"0 0 24 24",fill:"none",xmlns:"http://www.w3.org/2000/svg",...t},e.createElement("g",{id:"Arrow / Expand"},e.createElement("path",{id:"Vector",d:"M10 19H5V14M14 5H19V10",stroke:"#fff",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round"})));export{o as default};

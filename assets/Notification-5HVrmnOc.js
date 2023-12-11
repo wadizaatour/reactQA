@@ -1,0 +1,1 @@
+import{j as i}from"./index-V2qvE0AB.js";const n="_notification_a2a94_1",o="_fadeInOut_a2a94_1",a={notification:n,fadeInOut:o},s=({message:t})=>i.jsxDEV("span",{className:a.notification,children:t},void 0,!1,{fileName:"C:/Users/wadi/Documents/repos/reactAppQA/reactQA/src/components/Notification/Notification.tsx",lineNumber:8,columnNumber:10},void 0);export{s as default};
