@@ -29,11 +29,13 @@ const questionsSlice = createSlice({
       state.list =
         storedQuestionList !== null ? JSON.parse(storedQuestionList) : []
     },
+
     sortQuestionList(state) {
       state.list.sort((a, b) =>
         a.question.localeCompare(b.question, undefined, { sensitivity: 'base' })
       )
     },
+
     setAddFormErrors(state, action: PayloadAction<FormError>) {
       state.addformErrors = action.payload
     },
@@ -55,6 +57,7 @@ const questionsSlice = createSlice({
       })
       localStorage.setItem('questions', JSON.stringify(state.list))
     },
+
     addQuestion(
       state,
       action: PayloadAction<{ question: string; answer: string }>
@@ -73,6 +76,7 @@ const questionsSlice = createSlice({
       localStorage.setItem('questions', JSON.stringify(filteredArray))
       state.list = filteredArray
     },
+
     deleteAll(state) {
       state.list = []
       localStorage.setItem('questions', JSON.stringify([]))

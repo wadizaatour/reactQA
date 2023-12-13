@@ -124,7 +124,6 @@ const Form = () => {
             value={questionItem.answer}
           />
         </label>
-
         <Button
           loading={loading}
           type="submit"
